@@ -9,8 +9,22 @@ body {
 header {
     background-color: #009688;
     color: #fff;
-    padding: 1rem;
     text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    margin-right: 0.625rem;
+}
+
+.title {
+    flex-grow: 1;
+    text-align: center;
+    padding-right: 5.625rem;
 }
 
 section {
@@ -23,7 +37,7 @@ section {
 
 h1,
 h2 {
-    color: #009688;
+    color: #d08f0e;
 }
 
 p {
