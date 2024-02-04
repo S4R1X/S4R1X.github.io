@@ -30,6 +30,12 @@ body {
     }
 }
 
+@media only screen and (min-width: 800px) {
+    .Icons {
+        width: 3.5rem;
+    }
+}
+
 section {
     max-width: 50rem;
     margin: 1.25rem auto;
