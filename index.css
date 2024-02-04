@@ -7,24 +7,15 @@ body {
 }
 
 header {
-    background-color: #009688;
     color: #fff;
     text-align: center;
     display: flex;
     align-items: center;
 }
 
-.avatar {
-    border-radius: 50%;
-    width: 5rem;
-    height: 5rem;
-    margin-right: 0.625rem;
-}
-
-.title {
-    flex-grow: 1;
-    text-align: center;
-    padding-right: 5.625rem;
+.Icons {
+    padding: 0.5rem;
+    width: 3rem;
 }
 
 section {
