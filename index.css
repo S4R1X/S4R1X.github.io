@@ -60,9 +60,12 @@ p {
 }
 
 footer {
-    background-color: #009688;
+    background-color: #ca99a7;
     color: #fff;
-    padding: 0.625rem;
-    /* Converted from 10px to rem */
+    padding-top: 1rem;
+    padding-bottom: 0.25rem;
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
     text-align: center;
 }
