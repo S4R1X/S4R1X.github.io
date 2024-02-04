@@ -7,10 +7,8 @@ body {
 }
 
 header {
-    color: #fff;
     text-align: center;
     display: flex;
-    align-items: center;
 }
 
 .Icons {
@@ -28,7 +26,8 @@ section {
 
 h1,
 h2 {
-    color: #d08f0e;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #d9564a;
 }
 
 p {
