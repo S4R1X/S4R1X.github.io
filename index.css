@@ -64,8 +64,8 @@ footer {
     color: #fff;
     padding-top: 1rem;
     padding-bottom: 0.25rem;
-    position: absolute;
-    bottom: 0%;
+    position: fixed;
+    bottom: 0;
     width: 100%;
     text-align: center;
 }
