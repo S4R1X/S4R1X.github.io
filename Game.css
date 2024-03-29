@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: black;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 10.5rem);
+    grid-template-rows: repeat(3, 10.6rem);
+    gap: 8px;
+    border: 0.5rem solid whitesmoke;
+    background-color: white;
+}
+
+.subboard {
+    display: grid;
+    grid-template-columns: repeat(3, 3.5rem);
+    grid-template-rows: repeat(3, 3.5rem);
+    gap: 2px;
+}
+
+.cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5rem;
+    cursor: pointer;
+    background-color: #333;
+    border: 1px dashed whitesmoke;
+    position: relative;
+}
+
+.supercell {
+    background-color: #333;
+    font-size: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell .subboard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.cell:hover {
+    background-color: #f0f0f0;
+}
+
+.x {
+    color: #FF218C;
+}
+
+.o {
+    color: #21B1FF;
+}
+
+.t {
+    color: #FFD800;
+}
+
+.going {
+    display: none;
+}
+
+.endcard {
+    width: 100%;
+    height: 20%;
+    background-color: rgb(80, 80, 80);
+    position: absolute;
+    border: rgb(255, 255, 255) 3px solid;
+    font-size: 800%;
+    text-align: center;
+}
+
+.screenfade {
+    width: 110%;
+    height: 110%;
+    background-color: #0000006f;
+    position: absolute;
+}
+
+.hidden {
+    display: none;
+}
