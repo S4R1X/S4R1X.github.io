@@ -30,6 +30,9 @@ function Turns(par) {
     } else {
         sym = 'o'
     }
+    if (games[target][2] === true) {
+        target = 10
+    }
 }
 
 function Placement(par, let, val) {
@@ -42,9 +45,6 @@ function Placement(par, let, val) {
                     target = index
                     break posLoop
                 }
-            }
-            if (games[target][2] === true) {
-                target = 10
             }
             square.innerHTML = sym
             square.classList.add(sym)
