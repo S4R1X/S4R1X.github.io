@@ -10,8 +10,10 @@ body {
 
 .board {
     display: grid;
-    grid-template-columns: repeat(3, 10.5rem);
-    grid-template-rows: repeat(3, 10.6rem);
+    grid-template-columns: repeat(3, minmax(80px, 1fr));
+    /* Adjusted for smaller screens */
+    grid-template-rows: repeat(3, minmax(80px, 1fr));
+    /* Adjusted for smaller screens */
     gap: 8px;
     border: 0.5rem solid whitesmoke;
     background-color: white;
@@ -19,8 +21,10 @@ body {
 
 .subboard {
     display: grid;
-    grid-template-columns: repeat(3, 3.5rem);
-    grid-template-rows: repeat(3, 3.5rem);
+    grid-template-columns: repeat(3, 33px);
+    /* Adjusted for smaller screens */
+    grid-template-rows: repeat(3, 33px);
+    /* Adjusted for smaller screens */
     gap: 2px;
 }
 
@@ -28,7 +32,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3.5rem;
+    font-size: 2rem;
+    /* Adjusted for smaller screens */
     cursor: pointer;
     background-color: #333;
     border: 1px dashed whitesmoke;
@@ -36,7 +41,8 @@ body {
 }
 
 .supercell {
-    font-size: 10rem;
+    font-size: 5rem;
+    /* Adjusted for smaller screens */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,7 +55,6 @@ body {
     width: 100%;
     height: 100%;
 }
-
 
 .cell:hover {
     background-color: #f0f0f0;
@@ -98,4 +103,48 @@ body {
 
 .target {
     background-color: #FFD800;
+}
+
+@media screen and (min-width: 1024px) {
+
+    /* Adjustments for screens larger than 1024px */
+    .board {
+        grid-template-columns: repeat(3, minmax(150px, 1fr));
+        grid-template-rows: repeat(3, minmax(150px, 1fr));
+    }
+
+    .subboard {
+        grid-template-columns: repeat(3, 50px);
+        grid-template-rows: repeat(3, 50px);
+    }
+
+    .cell {
+        font-size: 4rem;
+    }
+
+    .supercell {
+        font-size: 12rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+
+    /* Adjustments for screens larger than 1024px */
+    .board {
+        grid-template-columns: repeat(3, minmax(200px, 1fr));
+        grid-template-rows: repeat(3, minmax(200px, 1fr));
+    }
+
+    .subboard {
+        grid-template-columns: repeat(3, 66px);
+        grid-template-rows: repeat(3, 66px);
+    }
+
+    .cell {
+        font-size: 4rem;
+    }
+
+    .supercell {
+        font-size: 12rem;
+    }
 }
