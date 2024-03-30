@@ -78,6 +78,7 @@ function Placement(par, let, val) {
                     if (count === 3) {
                         games[par][2] = !games[par][2]
                         document.getElementById(pos[par]).classList.add('hidden')
+                        document.getElementById('B' + pos[par]).classList.add('target')
                         document.getElementById('B' + pos[par]).innerHTML = sym
                         document.getElementById('B' + pos[par]).classList.add(sym)
                         bitWinCheck(par, player)
@@ -86,6 +87,7 @@ function Placement(par, let, val) {
                 }
             }
             Turns(par)
+            newTarget(let, val)
         }
     }
 }
@@ -119,5 +121,24 @@ function bitWinCheck(par, player) {
 
             }
         }
+    }
+}
+
+
+function newTarget(letter, val) {
+    let elements = document.getElementsByClassName('subboard')
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.add('nontarget')
+        elements[i].classList.remove('target')
+    }
+    console.log(target)
+    if (target === 10) {
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].classList.remove('nontarget')
+            elements[i].classList.add('target')
+        }
+    } else {
+        document.getElementById(letter + val).classList.remove('nontarget');
+        document.getElementById(letter + val).classList.add('target');
     }
 }
