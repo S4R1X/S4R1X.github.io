@@ -10,6 +10,8 @@ body {
 
 .board {
     display: grid;
+    grid-template-columns: repeat(3, 10.5rem);
+    grid-template-rows: repeat(3, 10.6rem);
     grid-template-columns: repeat(3, minmax(80px, 1fr));
     /* Adjusted for smaller screens */
     grid-template-rows: repeat(3, minmax(80px, 1fr));
@@ -21,6 +23,8 @@ body {
 
 .subboard {
     display: grid;
+    grid-template-columns: repeat(3, 3.5rem);
+    grid-template-rows: repeat(3, 3.5rem);
     grid-template-columns: repeat(3, 33px);
     /* Adjusted for smaller screens */
     grid-template-rows: repeat(3, 33px);
@@ -32,6 +36,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 3.5rem;
     font-size: 2rem;
     /* Adjusted for smaller screens */
     cursor: pointer;
@@ -41,12 +46,12 @@ body {
 }
 
 .supercell {
-    font-size: 12rem;
+    font-size: 10rem;
+    font-size: 5rem;
+    /* Adjusted for smaller screens */
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 200px;
-    /* Adjust the height as needed */
 }
 
 .cell .subboard {
@@ -56,6 +61,7 @@ body {
     width: 100%;
     height: 100%;
 }
+
 
 .cell:hover {
     background-color: #f0f0f0;
@@ -69,16 +75,16 @@ body {
     color: #21B1FF;
 }
 
+.t {
+    color: #FFD800;
+}
+
 .bx {
     background-color: #FF218C;
 }
 
 .bo {
     background-color: #21B1FF;
-}
-
-.t {
-    color: #FFD800;
 }
 
 .txt {
