@@ -41,11 +41,12 @@ body {
 }
 
 .supercell {
-    font-size: 5rem;
-    /* Adjusted for smaller screens */
+    font-size: 12rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 200px;
+    /* Adjust the height as needed */
 }
 
 .cell .subboard {
@@ -68,8 +69,20 @@ body {
     color: #21B1FF;
 }
 
+.bx {
+    background-color: #FF218C;
+}
+
+.bo {
+    background-color: #21B1FF;
+}
+
 .t {
     color: #FFD800;
+}
+
+.txt {
+    color: #333;
 }
 
 .going {

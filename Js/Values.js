@@ -13,6 +13,10 @@ function Turns(par) {
     if (games[par][0] === 9) {
         gamesfilled++
         games[par][2] = !games[par][2]
+        document.getElementById(pos[par]).classList.add('hidden')
+        document.getElementById('B' + pos[par]).classList.add('target')
+        document.getElementById('B' + pos[par]).innerHTML = 'd'
+        document.getElementById('B' + pos[par]).classList.add('txt')
     }
     if (won === true) {
         document.getElementById('endcard').innerHTML = sym + ' is the winner'
@@ -78,9 +82,9 @@ function Placement(par, let, val) {
                     if (count === 3) {
                         games[par][2] = !games[par][2]
                         document.getElementById(pos[par]).classList.add('hidden')
-                        document.getElementById('B' + pos[par]).classList.add('target')
+                        document.getElementById('B' + pos[par]).classList.add('b' + sym)
                         document.getElementById('B' + pos[par]).innerHTML = sym
-                        document.getElementById('B' + pos[par]).classList.add(sym)
+                        document.getElementById('B' + pos[par]).classList.add('txt')
                         bitWinCheck(par, player)
                         break outerLoop
                     }
