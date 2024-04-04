@@ -29,13 +29,19 @@ function Turns(par) {
         document.getElementById('endcard').classList.add(sym)
         document.getElementById('endcard').classList.remove('going')
         document.getElementById('screenfade').classList.remove('going')
-    } else if (sym === 'o') {
-        sym = 'x'
     } else {
-        sym = 'o'
+        flipTurn()
     }
     if (games[target][2] === true) {
         target = 10
+    }
+}
+
+function flipTurn() {
+    if (sym === 'o') {
+        sym = 'x'
+    } else {
+        sym = 'o'
     }
 }
 
@@ -135,7 +141,7 @@ function newTarget(letter, val) {
         elements[i].classList.add('nontarget')
         elements[i].classList.remove('target')
     }
-    console.log(target)
+
     if (target === 10) {
         for (var i = 0; i < elements.length; i++) {
             elements[i].classList.remove('nontarget')
@@ -145,4 +151,18 @@ function newTarget(letter, val) {
         document.getElementById(letter + val).classList.remove('nontarget');
         document.getElementById(letter + val).classList.add('target');
     }
+}
+
+function newGame() {
+    flipTurn()
+    p1 = [[[], [], [], [], [], [], [], [], []], []]
+    p2 = [[[], [], [], [], [], [], [], [], []], []]
+    games = [[0, ['A', '1'], false], [0, ['A', '2'], false], [0, ['A', '3'], false], [0, ['B', '1'], false], [0, ['B', '2'], false], [0, ['B', '3'], false], [0, ['C', '1'], false], [0, ['C', '2'], false], [0, ['C', '3'], false]]
+    gamesfilled = 0
+    won = false
+    target = 10
+    pos = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3']
+    hit = 10
+
+    document.getElementById('body').innerHTML = Myhtml
 }

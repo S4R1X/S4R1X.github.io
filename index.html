@@ -7,7 +7,7 @@
 <title>Tic Tac Toe</title>
 <link rel="stylesheet" href="Game.css">
 </head>
-<body>
+<body id="body">
   <div class="board">
     <div class="supercell" id="BA1">
       <div class="subboard nontarget" id="A1">
@@ -128,7 +128,8 @@
     </div>
   </div>
   <div class="screenfade going" id="screenfade"></div>
-  <div class="endcard going" id="endcard"></div>
+  <div class="endcard going" id="endcard" onclick="newGame()"></div>
 </body>
 <script src="Js\Values.js"></script>
+<script src="Js\htmlin.js"></script>
 </html>
