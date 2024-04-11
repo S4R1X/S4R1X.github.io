@@ -7,6 +7,7 @@ won = false
 target = 10
 pos = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3']
 hit = 10
+firstTurn = '4'
 const Myhtml = document.getElementById('body').innerHTML
 
 function Turns(par) {
@@ -48,57 +49,60 @@ function flipTurn() {
 
 function Placement(par, let, val) {
     let square = document.getElementById(par + let + val)
-    if (square.innerHTML === '' && won === false && games[par][2] === false) {
-        if (target == par || target == 10) {
-            posLoop:
-            for (let index = 0; index < pos.length; index++) {
-                if (pos[index] === let + val) {
-                    target = index
-                    break posLoop
-                }
-            }
-            square.innerHTML = sym
-            square.classList.add(sym)
-
-            player = p2
-            if (sym === 'o') {
-                player = p1
-            }
-
-            player[0][par].push(let)
-            player[0][par].push(val)
-
-            if (let + val === 'B2') {
-                player[0][par].push('S')
-                player[0][par].push('L')
-            } else if (let + val === 'A1' || let + val === 'C3') {
-                player[0][par].push('L')
-            } else if (let + val === 'A3' || let + val === 'C1') {
-                player[0][par].push('S')
-            }
-
-            outerLoop:
-            for (let index = 0; index < player[0][par].length; index++) {
-                subject = player[0][par][index]
-                let count = 0
-
-                for (let dindex = 0; dindex < player[0][par].length; dindex++) {
-                    if (subject === player[0][par][dindex]) {
-                        count++
-                    }
-                    if (count === 3) {
-                        games[par][2] = !games[par][2]
-                        document.getElementById(pos[par]).classList.add('hidden')
-                        document.getElementById('B' + pos[par]).classList.add('b' + sym)
-                        document.getElementById('B' + pos[par]).innerHTML = sym
-                        document.getElementById('B' + pos[par]).classList.add('txt')
-                        bitWinCheck(par, player)
-                        break outerLoop
+    if (firstTurn !== par) {
+        firstTurn = '0'
+        if (square.innerHTML === '' && won === false && games[par][2] === false) {
+            if (target == par || target == 10) {
+                posLoop:
+                for (let index = 0; index < pos.length; index++) {
+                    if (pos[index] === let + val) {
+                        target = index
+                        break posLoop
                     }
                 }
+                square.innerHTML = sym
+                square.classList.add(sym)
+
+                player = p2
+                if (sym === 'o') {
+                    player = p1
+                }
+
+                player[0][par].push(let)
+                player[0][par].push(val)
+
+                if (let + val === 'B2') {
+                    player[0][par].push('S')
+                    player[0][par].push('L')
+                } else if (let + val === 'A1' || let + val === 'C3') {
+                    player[0][par].push('L')
+                } else if (let + val === 'A3' || let + val === 'C1') {
+                    player[0][par].push('S')
+                }
+
+                outerLoop:
+                for (let index = 0; index < player[0][par].length; index++) {
+                    subject = player[0][par][index]
+                    let count = 0
+
+                    for (let dindex = 0; dindex < player[0][par].length; dindex++) {
+                        if (subject === player[0][par][dindex]) {
+                            count++
+                        }
+                        if (count === 3) {
+                            games[par][2] = !games[par][2]
+                            document.getElementById(pos[par]).classList.add('hidden')
+                            document.getElementById('B' + pos[par]).classList.add('b' + sym)
+                            document.getElementById('B' + pos[par]).innerHTML = sym
+                            document.getElementById('B' + pos[par]).classList.add('txt')
+                            bitWinCheck(par, player)
+                            break outerLoop
+                        }
+                    }
+                }
+                Turns(par)
+                newTarget(let, val)
             }
-            Turns(par)
-            newTarget(let, val)
         }
     }
 }
@@ -156,6 +160,7 @@ function newTarget(letter, val) {
 
 function newGame() {
     flipTurn()
+    firstTurn = '4'
     p1 = [[[], [], [], [], [], [], [], [], []], []]
     p2 = [[[], [], [], [], [], [], [], [], []], []]
     games = [[0, ['A', '1'], false], [0, ['A', '2'], false], [0, ['A', '3'], false], [0, ['B', '1'], false], [0, ['B', '2'], false], [0, ['B', '3'], false], [0, ['C', '1'], false], [0, ['C', '2'], false], [0, ['C', '3'], false]]
