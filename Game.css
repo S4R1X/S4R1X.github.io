@@ -177,3 +177,44 @@ body {
         font-size: 800%;
     }
 }
+
+.rulesPopUp {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    background-color: #393939d3;
+}
+
+.rulesTitle {
+    text-align: center;
+    font-size: 300%;
+    color: #f0f0f0;
+}
+
+.rulesText {
+    padding: 2%;
+    color: white;
+}
+
+.rulesIcon {
+    color: whitesmoke;
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    user-select: none;
+    font-weight: bolder;
+}
+
+.rulesClose {
+    font-weight: bolder;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    /* Adjust this according to your layout */
+    transform: translateX(-50%);
+    color: #FFD800;
+    text-align: center;
+    user-select: none;
+    font-size: 150%;
+}

@@ -8,6 +8,7 @@ target = 10
 pos = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3']
 hit = 10
 firstTurn = '4'
+rules = false
 const Myhtml = document.getElementById('body').innerHTML
 
 function Turns(par) {
@@ -50,9 +51,9 @@ function flipTurn() {
 function Placement(par, let, val) {
     let square = document.getElementById(par + let + val)
     if (firstTurn !== par) {
-        firstTurn = '10'
-        if (square.innerHTML === '' && won === false && games[par][2] === false) {
+        if (square.innerHTML === '' && won === false && games[par][2] === false && rules === false) {
             if (target == par || target == 10) {
+                firstTurn = '10'
                 posLoop:
                 for (let index = 0; index < pos.length; index++) {
                     if (pos[index] === let + val) {
