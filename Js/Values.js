@@ -50,7 +50,7 @@ function flipTurn() {
 function Placement(par, let, val) {
     let square = document.getElementById(par + let + val)
     if (firstTurn !== par) {
-        firstTurn = '0'
+        firstTurn = '10'
         if (square.innerHTML === '' && won === false && games[par][2] === false) {
             if (target == par || target == 10) {
                 posLoop:
@@ -144,17 +144,19 @@ function newTarget(letter, val) {
     let elements = document.getElementsByClassName('subboard')
     for (var i = 0; i < elements.length; i++) {
         elements[i].classList.add('nontarget')
+        elements[i].classList.remove('bx')
+        elements[i].classList.remove('bo')
         elements[i].classList.remove('target')
     }
 
     if (target === 10) {
         for (var i = 0; i < elements.length; i++) {
             elements[i].classList.remove('nontarget')
-            elements[i].classList.add('target')
+            elements[i].classList.add('b' + sym)
         }
     } else {
         document.getElementById(letter + val).classList.remove('nontarget');
-        document.getElementById(letter + val).classList.add('target');
+        document.getElementById(letter + val).classList.add('b' + sym);
     }
 }
 
@@ -171,4 +173,17 @@ function newGame() {
     hit = 10
 
     document.getElementById('body').innerHTML = Myhtml
+    let elements = document.getElementsByClassName('subboard')
+    for (var i = 0; i < elements.length; i++) {
+        if (i !== 4) {
+            elements[i].classList.remove('bx')
+            elements[i].classList.remove('bo')
+            elements[i].classList.remove('nontarget')
+            elements[i].classList.add('b' + sym)
+        } else {
+            elements[i].classList.remove('bx')
+            elements[i].classList.remove('bo')
+            elements[i].classList.add('nontarget')
+        }
+    }
 }
