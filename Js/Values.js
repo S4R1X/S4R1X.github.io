@@ -54,6 +54,7 @@ function Placement(par, let, val) {
         if (square.innerHTML === '' && won === false && games[par][2] === false && rules === false) {
             if (target == par || target == 10) {
                 firstTurn = '10'
+                lastMove = [par, let, val, target]
                 posLoop:
                 for (let index = 0; index < pos.length; index++) {
                     if (pos[index] === let + val) {

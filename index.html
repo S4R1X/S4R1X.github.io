@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<link rel="icon" type="image/x-icon" href="logo.jpg">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tic Tac Toe</title>
-<link rel="stylesheet" href="Game.css">
+  <link rel="icon" type="image/x-icon" href="logo.jpg">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="Game.css">
 </head>
+
 <body id="body">
   <div class="rulesIcon" id="rulesIcon" onclick="openRules()">Rules</div>
   <div class="board">
@@ -22,7 +24,7 @@
         <div class="cell" id="0C2" onclick="Placement('0','C','2')"></div>
         <div class="cell" id="0C3" onclick="Placement('0','C','3')"></div>
       </div>
-    </div>    
+    </div>
     <div class="supercell" id="BA2">
       <div class="subboard bo" id="A2">
         <div class="cell" id="1A1" onclick="Placement('1','A','1')"></div>
@@ -88,7 +90,7 @@
         <div class="cell" id="5C3" onclick="Placement('5','C','3')"></div>
       </div>
     </div>
-        <div class="supercell" id="BC1">
+    <div class="supercell" id="BC1">
       <div class="subboard bo" id="C1">
         <div class="cell" id="6A1" onclick="Placement('6','A','1')"></div>
         <div class="cell" id="6A2" onclick="Placement('6','A','2')"></div>
@@ -132,10 +134,18 @@
   <div class="endcard going" id="endcard" onclick="newGame()"></div>
   <div class="rulesPopUp going" id="rules">
     <h3 class="rulesTitle">Rules</h3>
-    <p class="rulesText">In Big Toe, the goal of the game is simple. The board is divided into nine big games. You need to win three big games in a line. Two player will take turns playing X's and O's in the little squares on the board. When a move is made, the next player must play in the board corresponding with the square previously played in. So, if you were to play in the top right corner of a game, your opponent needs to play in the top right game. If the game you need to play in has completed, you may go to any open square. If you get three of your symbols in a line in a small game, you win that game. If you win three big games in a line, you win. The loser of the last game will start the next game, and you may not play in the center on the first turn.</p>
+    <p class="rulesText">In Big Toe, the goal of the game is simple. The board is divided into nine big games. You need
+      to win three big games in a line. Two player will take turns playing X's and O's in the little squares on the
+      board. When a move is made, the next player must play in the board corresponding with the square previously played
+      in. So, if you were to play in the top right corner of a game, your opponent needs to play in the top right game.
+      If the game you need to play in has completed, you may go to any open square. If you get three of your symbols in
+      a line in a small game, you win that game. If you win three big games in a line, you win. The loser of the last
+      game will start the next game, and you may not play in the center on the first turn.</p>
     <p class="rulesClose" onclick="closeRules()">close</p>
   </div>
 </body>
+<script src="Js\Undo.js"></script>
 <script src="Js\Values.js"></script>
 <script src="Js\Rules.js"></script>
+
 </html>
