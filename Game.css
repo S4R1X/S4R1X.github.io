@@ -218,3 +218,19 @@ body {
     user-select: none;
     font-size: 150%;
 }
+
+.firstSelector {
+    user-select: none;
+    font-weight: bolder;
+    font-size: 300%;
+    display: inline-flex;
+    cursor: pointer;
+    padding-inline: 1rem;
+    border: #f0f0f0 solid 0.2rem;
+    border-radius: 100%;
+}
+
+.pre {
+    position: fixed;
+    bottom: 20%;
+}
