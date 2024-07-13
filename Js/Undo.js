@@ -1,5 +1,0 @@
-lastMove = []
-
-function undoLastMove() {
-
-}

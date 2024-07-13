@@ -6,20 +6,20 @@ sym = 'o'
 won = false
 target = 10
 pos = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3']
-hit = 10
+
 firstTurn = '4'
 rules = false
 const Myhtml = document.getElementById('body').innerHTML
 
-function Turns(par) {
-    games[par][0]++
-    if (games[par][0] === 9) {
+function Turns(big) {
+    games[big][0]++
+    if (games[big][0] === 9) {
         gamesfilled++
-        games[par][2] = !games[par][2]
-        document.getElementById(pos[par]).classList.add('hidden')
-        document.getElementById('B' + pos[par]).classList.add('target')
-        document.getElementById('B' + pos[par]).innerHTML = 'd'
-        document.getElementById('B' + pos[par]).classList.add('txt')
+        games[big][2] = !games[big][2]
+        document.getElementById(big).classList.add('hidden')
+        document.getElementById('B' + big).classList.add('target')
+        document.getElementById('B' + big).innerHTML = 'd'
+        document.getElementById('B' + big).classList.add('txt')
     }
     if (won === true) {
         document.getElementById('endcard').innerHTML = sym + ' is the winner'
@@ -48,16 +48,15 @@ function flipTurn() {
     }
 }
 
-function Placement(par, let, val) {
-    let square = document.getElementById(par + let + val)
-    if (firstTurn !== par) {
-        if (square.innerHTML === '' && won === false && games[par][2] === false && rules === false) {
-            if (target == par || target == 10) {
+function Placement(big, small) {
+    let square = document.getElementById(big + small)
+    if (firstTurn !== big) {
+        if (square.innerHTML === '' && won === false && games[big][2] === false && rules === false) {
+            if (target == big || target == 10) {
                 firstTurn = '10'
-                lastMove = [par, let, val, target]
                 posLoop:
                 for (let index = 0; index < pos.length; index++) {
-                    if (pos[index] === let + val) {
+                    if (pos[index] === pos[small]) {
                         target = index
                         break posLoop
                     }
@@ -70,56 +69,57 @@ function Placement(par, let, val) {
                     player = p1
                 }
 
-                player[0][par].push(let)
-                player[0][par].push(val)
+                for (var i = 0; i < pos[small].length; i++) {
+                    player[0][big].push(pos[small].charAt(i))
+                }
 
-                if (let + val === 'B2') {
-                    player[0][par].push('S')
-                    player[0][par].push('L')
-                } else if (let + val === 'A1' || let + val === 'C3') {
-                    player[0][par].push('L')
-                } else if (let + val === 'A3' || let + val === 'C1') {
-                    player[0][par].push('S')
+                if (pos[small] === 'B2') {
+                    player[0][big].push('S')
+                    player[0][big].push('L')
+                } else if (pos[small] === 'A1' || pos[small] === 'C3') {
+                    player[0][big].push('L')
+                } else if (pos[small] === 'A3' || pos[small] === 'C1') {
+                    player[0][big].push('S')
                 }
 
                 outerLoop:
-                for (let index = 0; index < player[0][par].length; index++) {
-                    subject = player[0][par][index]
+                for (let index = 0; index < player[0][big].length; index++) {
+                    subject = player[0][big][index]
                     let count = 0
 
-                    for (let dindex = 0; dindex < player[0][par].length; dindex++) {
-                        if (subject === player[0][par][dindex]) {
+                    for (let dindex = 0; dindex < player[0][big].length; dindex++) {
+                        if (subject === player[0][big][dindex]) {
                             count++
                         }
                         if (count === 3) {
-                            games[par][2] = !games[par][2]
-                            document.getElementById(pos[par]).classList.add('hidden')
-                            document.getElementById('B' + pos[par]).classList.add('b' + sym)
-                            document.getElementById('B' + pos[par]).innerHTML = sym
-                            document.getElementById('B' + pos[par]).classList.add('txt')
-                            bitWinCheck(par, player)
+                            games[big][2] = !games[big][2]
+                            document.getElementById(big).classList.add('hidden')
+                            document.getElementById('B' + big).classList.add('b' + sym)
+                            document.getElementById('B' + big).innerHTML = sym
+                            document.getElementById('B' + big).classList.add('txt')
+                            bitWinCheck(big, player)
                             break outerLoop
                         }
                     }
                 }
-                Turns(par)
-                newTarget(let, val)
+                Turns(big)
+                newTarget(small)
             }
         }
     }
 }
 
-function bitWinCheck(par, player) {
+function bitWinCheck(big, player) {
     gamesfilled++
 
-    player[1].push(games[par][1][0])
-    player[1].push(games[par][1][1])
-    if (games[par][1][0] + games[par][1][1] === 'B2') {
+    player[1].push(games[big][1][0])
+    player[1].push(games[big][1][1])
+    if (games[big][1][0] + games[big][1][1] === 'B2') {
         player[1].push('S')
         player[1].push('L')
-    } else if (games[par][1][0] + games[par][1][1] === 'A1' || games[par][1][0] + games[par][1][1] === 'C3') {
+    } else if (games[big][1][0] + games[big][1][1] === 'A1' || games[big][1][0] + games[big][1][1] === 'C3') {
         player[1].push('L')
-    } else if (games[par][1][0] + games[par][1][1] === 'A3' || games[par][1][0] + games[par][1][1] === 'C1') {
+    } else if (games[big][1][0] + games[big][1][1] === 'A3' || games[big][1][0] + games[big][1][1] === 'C1') {
         player[1].push('S')
     }
 
@@ -142,7 +142,7 @@ function bitWinCheck(par, player) {
 }
 
 
-function newTarget(letter, val) {
+function newTarget(small) {
     let elements = document.getElementsByClassName('subboard')
     for (var i = 0; i < elements.length; i++) {
         elements[i].classList.add('nontarget')
@@ -157,8 +157,8 @@ function newTarget(letter, val) {
             elements[i].classList.add('b' + sym)
         }
     } else {
-        document.getElementById(letter + val).classList.remove('nontarget');
-        document.getElementById(letter + val).classList.add('b' + sym);
+        document.getElementById(small).classList.remove('nontarget');
+        document.getElementById(small).classList.add('b' + sym);
     }
 }
 
@@ -171,8 +171,6 @@ function newGame() {
     gamesfilled = 0
     won = false
     target = 10
-    pos = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3']
-    hit = 10
 
     document.getElementById('body').innerHTML = Myhtml
     let elements = document.getElementsByClassName('subboard')
