@@ -218,3 +218,13 @@ body {
     user-select: none;
     font-size: 150%;
 }
+
+.firstSelector {
+    color: whitesmoke;
+    position: flex;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    user-select: none;
+    font-weight: bolder;
+}
