@@ -220,13 +220,17 @@ body {
 }
 
 .firstSelector {
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
     user-select: none;
     font-weight: bolder;
-    font-size: 200%;
-    display: inline-block;
+    font-size: 300%;
+    display: inline-flex;
+    cursor: pointer;
+    padding-inline: 1rem;
+    border: #f0f0f0 solid 0.2rem;
+    border-radius: 100%;
 }
 
-.pre {}
+.pre {
+    position: fixed;
+    bottom: 20%;
+}
