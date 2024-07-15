@@ -2,11 +2,11 @@ p1 = [[[], [], [], [], [], [], [], [], []], []]
 p2 = [[[], [], [], [], [], [], [], [], []], []]
 games = [[0, ['A', '1'], false], [0, ['A', '2'], false], [0, ['A', '3'], false], [0, ['B', '1'], false], [0, ['B', '2'], false], [0, ['B', '3'], false], [0, ['C', '1'], false], [0, ['C', '2'], false], [0, ['C', '3'], false]]
 gamesfilled = 0
-sym = 'o'
+sym = null
 won = false
 target = 10
 pos = ['A1', 'A2', 'A3', 'B1', 'B2', 'B3', 'C1', 'C2', 'C3']
-
+pre = false
 firstTurn = '4'
 rules = false
 const Myhtml = document.getElementById('body').innerHTML
@@ -171,6 +171,7 @@ function newGame() {
     gamesfilled = 0
     won = false
     target = 10
+    sym = null
 
     document.getElementById('body').innerHTML = Myhtml
     let elements = document.getElementsByClassName('subboard')
