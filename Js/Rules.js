@@ -7,6 +7,8 @@ function openRules() {
 function closeRules() {
     document.getElementById('rulesIcon').classList.remove('going')
     document.getElementById('rules').classList.add('going')
-    document.getElementById('pre').classList.remove('going')
+    if (!sym) {
+        document.getElementById('pre').classList.remove('going')
+    }
     rules = !rules
 }
