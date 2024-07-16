@@ -41,7 +41,7 @@ body {
     /* Adjusted for smaller screens */
     cursor: pointer;
     background-color: #333;
-    border: 1px dashed whitesmoke;
+    border: 1px solid rgba(245, 245, 245, 0.144);
     position: relative;
     user-select: none;
 }
