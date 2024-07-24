@@ -101,14 +101,15 @@ function Placement(big, small) {
 function bitWinCheck(big, player) {
     gamesfilled++
 
-    player[1].push(games[big][1][0])
-    player[1].push(games[big][1][1])
-    if (games[big][1][0] + games[big][1][1] === 'B2') {
+    for (var i = 0; i < pos[big].length; i++) {
+        player[1].push(pos[big].charAt(i))
+    }
+    if (pos[big] === 'B2') {
         player[1].push('S')
         player[1].push('L')
-    } else if (games[big][1][0] + games[big][1][1] === 'A1' || games[big][1][0] + games[big][1][1] === 'C3') {
+    } else if (pos[big] === 'A1' || pos[big] === 'C3') {
         player[1].push('L')
-    } else if (games[big][1][0] + games[big][1][1] === 'A3' || games[big][1][0] + games[big][1][1] === 'C1') {
+    } else if (pos[big] === 'A3' || pos[big] === 'C1') {
         player[1].push('S')
     }
 
