@@ -1,6 +1,6 @@
 p1 = [[[], [], [], [], [], [], [], [], []], []]
 p2 = [[[], [], [], [], [], [], [], [], []], []]
-games = [[0, ['A', '1'], false], [0, ['A', '2'], false], [0, ['A', '3'], false], [0, ['B', '1'], false], [0, ['B', '2'], false], [0, ['B', '3'], false], [0, ['C', '1'], false], [0, ['C', '2'], false], [0, ['C', '3'], false]]
+games = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 gamesfilled = 0
 sym = null
 won = false
@@ -12,10 +12,9 @@ rules = false
 const Myhtml = document.getElementById('body').innerHTML
 
 function Turns(big) {
-    games[big][0]++
-    if (games[big][0] === 9) {
+    games[big]++
+    if (games[big] === 9) {
         gamesfilled++
-        games[big][2] = !games[big][2]
         document.getElementById(big).classList.add('hidden')
         document.getElementById('B' + big).classList.add('target')
         document.getElementById('B' + big).innerHTML = 'd'
@@ -35,7 +34,7 @@ function Turns(big) {
     } else {
         flipTurn()
     }
-    if (games[target][2] === true) {
+    if (games[target] > 8) {
         target = 10
     }
 }
@@ -51,7 +50,7 @@ function flipTurn() {
 function Placement(big, small) {
     let square = document.getElementById(big + small)
     if (firstTurn !== big) {
-        if (square.innerHTML === '' && won === false && games[big][2] === false && rules === false) {
+        if (square.innerHTML === '' && won === false && games[big] !== 9 && rules === false) {
             if (target == big || target == 10) {
                 firstTurn = '10'
                 posLoop:
@@ -84,7 +83,6 @@ function Placement(big, small) {
 
                 const duplicates = player[0][big].filter((item, index) => player[0][big].indexOf(item) !== index)
                 if (duplicates.filter((item, index) => duplicates.indexOf(item) !== index).length > 0) {
-                    games[big][2] = !games[big][2]
                     document.getElementById(big).classList.add('hidden')
                     document.getElementById('B' + big).classList.add('b' + sym)
                     document.getElementById('B' + big).innerHTML = sym
@@ -100,7 +98,7 @@ function Placement(big, small) {
 
 function bitWinCheck(big, player) {
     gamesfilled++
-
+    games[big] = 10
     for (var i = 0; i < pos[big].length; i++) {
         player[1].push(pos[big].charAt(i))
     }
