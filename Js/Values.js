@@ -82,25 +82,14 @@ function Placement(big, small) {
                     player[0][big].push('S')
                 }
 
-                outerLoop:
-                for (let index = 0; index < player[0][big].length; index++) {
-                    subject = player[0][big][index]
-                    let count = 0
-
-                    for (let dindex = 0; dindex < player[0][big].length; dindex++) {
-                        if (subject === player[0][big][dindex]) {
-                            count++
-                        }
-                        if (count === 3) {
-                            games[big][2] = !games[big][2]
-                            document.getElementById(big).classList.add('hidden')
-                            document.getElementById('B' + big).classList.add('b' + sym)
-                            document.getElementById('B' + big).innerHTML = sym
-                            document.getElementById('B' + big).classList.add('txt')
-                            bitWinCheck(big, player)
-                            break outerLoop
-                        }
-                    }
+                const duplicates = player[0][big].filter((item, index) => player[0][big].indexOf(item) !== index)
+                if (duplicates.filter((item, index) => duplicates.indexOf(item) !== index).length > 0) {
+                    games[big][2] = !games[big][2]
+                    document.getElementById(big).classList.add('hidden')
+                    document.getElementById('B' + big).classList.add('b' + sym)
+                    document.getElementById('B' + big).innerHTML = sym
+                    document.getElementById('B' + big).classList.add('txt')
+                    bitWinCheck(big, player)
                 }
                 Turns(big)
                 newTarget(small)
