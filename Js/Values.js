@@ -49,38 +49,36 @@ function flipTurn() {
 
 function Placement(big, small) {
     let square = document.getElementById(big + small)
-    if (firstTurn !== big) {
-        if (square.innerHTML === '' && won === false && games[big] !== 9 && rules === false) {
-            if (target == big || target == 10) {
-                firstTurn = '10'
-                posLoop:
-                for (let index = 0; index < pos.length; index++) {
-                    if (pos[index] === pos[small]) {
-                        target = index
-                        break posLoop
-                    }
+    if (firstTurn !== big && square.innerHTML === '' && won === false && games[big] !== 9 && rules === false) {
+        if (target == big || target == 10) {
+            firstTurn = '10'
+            posLoop:
+            for (let index = 0; index < pos.length; index++) {
+                if (pos[index] === pos[small]) {
+                    target = index
+                    break posLoop
                 }
-                square.innerHTML = sym
-                square.classList.add(sym)
-
-                player = p2
-                if (sym === 'o') {
-                    player = p1
-                }
-
-                logPos(small, player[0][big])
-
-                const duplicates = player[0][big].filter((item, index) => player[0][big].indexOf(item) !== index)
-                if (duplicates.filter((item, index) => duplicates.indexOf(item) !== index).length > 0) {
-                    document.getElementById(big).classList.add('hidden')
-                    document.getElementById('B' + big).classList.add('b' + sym)
-                    document.getElementById('B' + big).innerHTML = sym
-                    document.getElementById('B' + big).classList.add('txt')
-                    bitWinCheck(big, player)
-                }
-                Turns(big)
-                newTarget(small)
             }
+            square.innerHTML = sym
+            square.classList.add(sym)
+
+            player = p2
+            if (sym === 'o') {
+                player = p1
+            }
+
+            logPos(small, player[0][big])
+
+            const duplicates = player[0][big].filter((item, index) => player[0][big].indexOf(item) !== index)
+            if (duplicates.filter((item, index) => duplicates.indexOf(item) !== index).length > 0) {
+                document.getElementById(big).classList.add('hidden')
+                document.getElementById('B' + big).classList.add('b' + sym)
+                document.getElementById('B' + big).innerHTML = sym
+                document.getElementById('B' + big).classList.add('txt')
+                bitWinCheck(big, player)
+            }
+            Turns(big)
+            newTarget(small)
         }
     }
 }
@@ -107,7 +105,6 @@ function bitWinCheck(big, player) {
         }
     }
 }
-
 
 function newTarget(small) {
     let elements = document.getElementsByClassName('subboard')
