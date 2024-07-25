@@ -31,9 +31,8 @@ function Turns(big) {
         document.getElementById('endcard').classList.add(sym)
         document.getElementById('endcard').classList.remove('going')
         document.getElementById('screenfade').classList.remove('going')
-    } else {
-        flipTurn()
     }
+    flipTurn()
     if (games[target] > 8) {
         target = 10
     }
@@ -127,7 +126,6 @@ function newTarget(small) {
 }
 
 function newGame() {
-    flipTurn()
     firstTurn = '4'
     p1 = [[[], [], [], [], [], [], [], [], []], []]
     p2 = [[[], [], [], [], [], [], [], [], []], []]
