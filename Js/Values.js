@@ -31,17 +31,13 @@ function Turns(big) {
         document.getElementById('endcard').classList.remove('going')
         document.getElementById('screenfade').classList.remove('going')
     }
-    flipTurn()
-    if (games[target] > 8) {
-        target = 10
-    }
-}
-
-function flipTurn() {
     if (sym === 'o') {
         sym = 'x'
     } else {
         sym = 'o'
+    }
+    if (games[target] > 8) {
+        target = 10
     }
 }
 
