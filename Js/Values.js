@@ -138,19 +138,6 @@ function newGame() {
     sym = null
 
     document.getElementById('body').innerHTML = Myhtml
-    let elements = document.getElementsByClassName('subboard')
-    for (var i = 0; i < elements.length; i++) {
-        if (i !== 4) {
-            elements[i].classList.remove('bx')
-            elements[i].classList.remove('bo')
-            elements[i].classList.remove('nontarget')
-            elements[i].classList.add('b' + sym)
-        } else {
-            elements[i].classList.remove('bx')
-            elements[i].classList.remove('bo')
-            elements[i].classList.add('nontarget')
-        }
-    }
 }
 
 function logPos(board, array) {
