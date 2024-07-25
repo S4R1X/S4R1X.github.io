@@ -68,18 +68,7 @@ function Placement(big, small) {
                     player = p1
                 }
 
-                for (var i = 0; i < pos[small].length; i++) {
-                    player[0][big].push(pos[small].charAt(i))
-                }
-
-                if (pos[small] === 'B2') {
-                    player[0][big].push('S')
-                    player[0][big].push('L')
-                } else if (pos[small] === 'A1' || pos[small] === 'C3') {
-                    player[0][big].push('L')
-                } else if (pos[small] === 'A3' || pos[small] === 'C1') {
-                    player[0][big].push('S')
-                }
+                logPos(small, player[0][big])
 
                 const duplicates = player[0][big].filter((item, index) => player[0][big].indexOf(item) !== index)
                 if (duplicates.filter((item, index) => duplicates.indexOf(item) !== index).length > 0) {
@@ -99,17 +88,7 @@ function Placement(big, small) {
 function bitWinCheck(big, player) {
     gamesfilled++
     games[big] = 10
-    for (var i = 0; i < pos[big].length; i++) {
-        player[1].push(pos[big].charAt(i))
-    }
-    if (pos[big] === 'B2') {
-        player[1].push('S')
-        player[1].push('L')
-    } else if (pos[big] === 'A1' || pos[big] === 'C3') {
-        player[1].push('L')
-    } else if (pos[big] === 'A3' || pos[big] === 'C1') {
-        player[1].push('S')
-    }
+    logPos(big, player[1])
 
     bigOuterLoop:
     for (let hindex = 0; hindex < player[1].length; hindex++) {
@@ -174,5 +153,20 @@ function newGame() {
             elements[i].classList.remove('bo')
             elements[i].classList.add('nontarget')
         }
+    }
+}
+
+function logPos(board, array) {
+    for (var i = 0; i < pos[board].length; i++) {
+        array.push(pos[board].charAt(i))
+    }
+
+    if (pos[board] === 'B2') {
+        array.push('S')
+        array.push('L')
+    } else if (pos[board] === 'A1' || pos[board] === 'C3') {
+        array.push('L')
+    } else if (pos[board] === 'A3' || pos[board] === 'C1') {
+        array.push('S')
     }
 }
