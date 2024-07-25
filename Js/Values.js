@@ -86,21 +86,9 @@ function bitWinCheck(big, player) {
     games[big] = 10
     logPos(big, player[1])
 
-    bigOuterLoop:
-    for (let hindex = 0; hindex < player[1].length; hindex++) {
-        bubject = player[1][hindex]
-        let bount = 0
-
-        for (let windex = 0; windex < player[1].length; windex++) {
-            if (bubject === player[1][windex]) {
-                bount++
-            }
-            if (bount === 3) {
-                won = !won
-                break bigOuterLoop
-
-            }
-        }
+    const duplicates = player[1].filter((item, index) => player[1].indexOf(item) !== index)
+    if (duplicates.filter((item, index) => duplicates.indexOf(item) !== index).length > 0) {
+        won = !won
     }
 }
 
