@@ -1,3 +1,5 @@
+rules = false
+
 function openRules() {
     document.getElementById('rules').classList.remove('going')
     document.getElementById('pre').classList.add('going')
