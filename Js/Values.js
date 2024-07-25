@@ -134,7 +134,7 @@ function newGame() {
     firstTurn = '4'
     p1 = [[[], [], [], [], [], [], [], [], []], []]
     p2 = [[[], [], [], [], [], [], [], [], []], []]
-    games = [[0, ['A', '1'], false], [0, ['A', '2'], false], [0, ['A', '3'], false], [0, ['B', '1'], false], [0, ['B', '2'], false], [0, ['B', '3'], false], [0, ['C', '1'], false], [0, ['C', '2'], false], [0, ['C', '3'], false]]
+    games = [0, 0, 0, 0, 0, 0, 0, 0, 0]
     gamesfilled = 0
     won = false
     target = 10
