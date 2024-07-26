@@ -136,22 +136,24 @@
   </div>
   <div class="screenfade d-none" id="screenfade"></div>
   <div class="endcard d-none" id="endcard" onclick="newGame()"></div>
-  <div class="rulesPopUp d-none" id="rules">
-    <h3 class="rulesTitle">Rules</h3>
-    <p class="rulesText">In Big Toe, the goal of the game is simple. The board is divided into nine big games. You need
+  <div class="bg-dark position-absolute top-50 start-50 translate-middle d-none d-grid gap-2 justify-content-center p-2"
+    id="rules">
+    <h3 class="text-center text-white"><strong>Rules</strong></h3>
+    <p class="text-white text-center mb-2">In Big Toe, the goal
+      of the game is simple. The board is divided into nine big
+      games. You need
       to win three big games in a line. Two player will take turns playing X's and O's in the little squares on the
       board. When a move is made, the next player must play in the board corresponding with the square previously played
       in. So, if you were to play in the top right corner of a game, your opponent needs to play in the top right game.
       If the game you need to play in has completed, you may go to any open square. If you get three of your symbols in
       a line in a small game, you win that game. If you win three big games in a line, you win. The loser of the last
       game will start the next game, and you may not play in the center on the first turn.</p>
-    <p class="btn btn-outline-warning position-absolute bottom-0 start-50 translate-middle-x mb-2"
-      onclick="closeRules()">
+    <p class="btn btn-outline-warning" onclick="closeRules()">
       close</p>
   </div>
   <div id="pre" class="position-absolute bottom-0 start-50 translate-middle-x mb-5">
     <h4 class="text-white">Who will go first?</h4>
-    <div class="d-grid gap-2 d-md-flex justify-content-center">
+    <div class="d-grid gap-2 d-flex justify-content-center">
       <div id="startX" class="btn btn-danger btn-lg" onclick="closePre('x')">X</div>
       <div id="startO" class="btn btn-primary btn-lg" onclick="closePre('o')">O</div>
     </div>
