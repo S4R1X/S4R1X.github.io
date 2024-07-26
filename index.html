@@ -12,7 +12,7 @@
 </head>
 
 <body id="body" class="bg-dark bg-gradient">
-  <rules role="button" class="btn btn-outline-info position-absolute top-0 start-50 translate-middle-x mt-2"
+  <rules role="button" class="btn btn-outline-warning position-absolute top-0 start-50 translate-middle-x mt-2"
     id="rulesIcon" onclick="openRules()">Rules
   </rules>
   <div id="board" class="board d-none">
@@ -145,7 +145,9 @@
       If the game you need to play in has completed, you may go to any open square. If you get three of your symbols in
       a line in a small game, you win that game. If you win three big games in a line, you win. The loser of the last
       game will start the next game, and you may not play in the center on the first turn.</p>
-    <p class="rulesClose" onclick="closeRules()">close</p>
+    <p class="btn btn-outline-warning position-absolute bottom-0 start-50 translate-middle-x mb-2"
+      onclick="closeRules()">
+      close</p>
   </div>
   <div id="pre" class="position-absolute bottom-0 start-50 translate-middle-x mb-5">
     <h4 class="text-white">Who will go first?</h4>
