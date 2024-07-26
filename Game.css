@@ -234,3 +234,7 @@ body {
     position: fixed;
     bottom: 20%;
 }
+
+.rules {
+    background-color: #ffffba;
+}

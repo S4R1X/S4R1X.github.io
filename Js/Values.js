@@ -22,14 +22,14 @@ function Turns(big) {
     if (won === true) {
         document.getElementById('endcard').innerHTML = sym + ' is the winner'
         document.getElementById('endcard').classList.add(sym)
-        document.getElementById('endcard').classList.remove('going')
-        document.getElementById('screenfade').classList.remove('going')
+        document.getElementById('endcard').classList.remove('d-none')
+        document.getElementById('screenfade').classList.remove('d-none')
     } else if (gamesfilled === 9 && won === false) {
         sym = 't'
         document.getElementById('endcard').innerHTML = "It's a draw"
         document.getElementById('endcard').classList.add(sym)
-        document.getElementById('endcard').classList.remove('going')
-        document.getElementById('screenfade').classList.remove('going')
+        document.getElementById('endcard').classList.remove('d-none')
+        document.getElementById('screenfade').classList.remove('d-none')
     }
     if (sym === 'o') {
         sym = 'x'
