@@ -15,7 +15,206 @@
   <rules role="button" class="btn btn-outline-warning position-absolute top-0 start-50 translate-middle-x mt-2"
     id="rulesIcon" onclick="openRules()">Rules
   </rules>
-  <div id="board" class="board d-none">
+  <table id="board" class="table table-bordered border-secondary table-dark d-none">
+    <tbody>
+      <tr class="supercell" id="B0">
+        <th scope="row">
+          <table class="table table-bordered border-secondary table-dark">
+            <tbody>
+              <tr>
+                <th scope="row" id="00" onclick="Placement('0','0')"></th>
+                <td id="01" onclick="Placement('0','1')"></td>
+                <td id="02" onclick="Placement('0','2')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="03" onclick="Placement('0','3')"></th>
+                <td id="04" onclick="Placement('0','4')"></td>
+                <td id="05" onclick="Placement('0','5')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="06" onclick="Placement('0','6')"></th>
+                <td id="07" onclick="Placement('0','7')"></td>
+                <td id="08" onclick="Placement('0','8')"></td>
+              </tr>
+            </tbody>
+          </table>
+        </th>
+        <td>
+          <table class="table table-bordered border-secondary table-dark">
+            <tbody>
+              <tr>
+                <th scope="row" id="10" onclick="Placement('1','0')"></th>
+                <td id="11" onclick="Placement('1','1')"></td>
+                <td id="12" onclick="Placement('1','2')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="13" onclick="Placement('1','3')"></th>
+                <td id="14" onclick="Placement('1','4')"></td>
+                <td id="15" onclick="Placement('1','5')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="16" onclick="Placement('1','6')"></th>
+                <td id="17" onclick="Placement('1','7')"></td>
+                <td id="18" onclick="Placement('1','8')"></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td>
+          <table class="table table-bordered border-secondary table-dark">
+            <tbody>
+              <tr>
+                <th scope="row" id="20" onclick="Placement('2','0')"></th>
+                <td id="21" onclick="Placement('2','1')"></td>
+                <td id="22" onclick="Placement('2','2')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="23" onclick="Placement('2','3')"></th>
+                <td id="24" onclick="Placement('2','4')"></td>
+                <td id="25" onclick="Placement('2','5')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="26" onclick="Placement('2','6')"></th>
+                <td id="27" onclick="Placement('2','7')"></td>
+                <td id="28" onclick="Placement('2','8')"></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          <table class="table table-bordered border-secondary table-dark">
+            <tbody>
+              <tr>
+                <th scope="row" id="30" onclick="Placement('3','0')"></th>
+                <td id="31" onclick="Placement('3','1')"></td>
+                <td id="32" onclick="Placement('3','2')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="33" onclick="Placement('3','3')"></th>
+                <td id="34" onclick="Placement('3','4')"></td>
+                <td id="35" onclick="Placement('3','5')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="36" onclick="Placement('3','6')"></th>
+                <td id="37" onclick="Placement('3','7')"></td>
+                <td id="38" onclick="Placement('3','8')"></td>
+              </tr>
+            </tbody>
+          </table>
+        </th>
+        <td>
+          <table class="table table-bordered border-secondary table-dark">
+            <tbody>
+              <tr>
+                <th scope="row" id="40" onclick="Placement('4','0')"></th>
+                <td id="41" onclick="Placement('4','1')"></td>
+                <td id="42" onclick="Placement('4','2')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="43" onclick="Placement('4','3')"></th>
+                <td id="44" onclick="Placement('4','4')"></td>
+                <td id="45" onclick="Placement('4','5')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="46" onclick="Placement('4','6')"></th>
+                <td id="47" onclick="Placement('4','7')"></td>
+                <td id="48" onclick="Placement('4','8')"></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td>
+          <table class="table table-bordered border-secondary table-dark">
+            <tbody>
+              <tr>
+                <th scope="row" id="50" onclick="Placement('5','0')"></th>
+                <td id="51" onclick="Placement('5','1')"></td>
+                <td id="52" onclick="Placement('5','2')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="53" onclick="Placement('5','3')"></th>
+                <td id="54" onclick="Placement('5','4')"></td>
+                <td id="55" onclick="Placement('5','5')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="56" onclick="Placement('5','6')"></th>
+                <td id="57" onclick="Placement('5','7')"></td>
+                <td id="58" onclick="Placement('5','8')"></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">
+          <table class="table table-bordered border-secondary table-dark">
+            <tbody>
+              <tr>
+                <th scope="row" id="60" onclick="Placement('6','0')"></th>
+                <td id="61" onclick="Placement('6','1')"></td>
+                <td id="62" onclick="Placement('6','2')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="63" onclick="Placement('6','3')"></th>
+                <td id="64" onclick="Placement('6','4')"></td>
+                <td id="65" onclick="Placement('6','5')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="66" onclick="Placement('6','6')"></th>
+                <td id="67" onclick="Placement('6','7')"></td>
+                <td id="68" onclick="Placement('6','8')"></td>
+              </tr>
+            </tbody>
+          </table>
+        </th>
+        <td>
+          <table class="table table-bordered border-secondary table-dark">
+            <tbody>
+              <tr>
+                <th scope="row" id="70" onclick="Placement('7','0')"></th>
+                <td id="71" onclick="Placement('7','1')"></td>
+                <td id="72" onclick="Placement('7','2')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="73" onclick="Placement('7','3')"></th>
+                <td id="74" onclick="Placement('7','4')"></td>
+                <td id="75" onclick="Placement('7','5')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="76" onclick="Placement('7','6')"></th>
+                <td id="77" onclick="Placement('7','7')"></td>
+                <td id="78" onclick="Placement('7','8')"></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td>
+          <table class="table table-bordered border-secondary table-dark">
+            <tbody>
+              <tr>
+                <th scope="row" id="80" onclick="Placement('8','0')"></th>
+                <td id="81" onclick="Placement('8','1')"></td>
+                <td id="82" onclick="Placement('8','2')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="83" onclick="Placement('8','3')"></th>
+                <td id="84" onclick="Placement('8','4')"></td>
+                <td id="85" onclick="Placement('8','5')"></td>
+              </tr>
+              <tr>
+                <th scope="row" id="86" onclick="Placement('8','6')"></th>
+                <td id="87" onclick="Placement('8','7')"></td>
+                <td id="88" onclick="Placement('8','8')"></td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- <div id="board" class="board d-none">
     <div class="supercell" id="B0">
       <div class="subboard" id="0">
         <div class="cell" id="00" onclick="Placement('0','0')"></div>
@@ -28,8 +227,8 @@
         <div class="cell" id="07" onclick="Placement('0','7')"></div>
         <div class="cell" id="08" onclick="Placement('0','8')"></div>
       </div>
-    </div>
-    <div class="supercell" id="B1">
+    </div> -->
+  <!-- <div class="supercell" id="B1">
       <div class="subboard" id="1">
         <div class="cell" id="10" onclick="Placement('1','0')"></div>
         <div class="cell" id="11" onclick="Placement('1','1')"></div>
@@ -132,7 +331,7 @@
         <div class="cell" id="87" onclick="Placement('8','7')"></div>
         <div class="cell" id="88" onclick="Placement('8','8')"></div>
       </div>
-    </div>
+    </div> -->
   </div>
   <div class="screenfade d-none" id="screenfade"></div>
   <div class="endcard d-none" id="endcard" onclick="newGame()"></div>
