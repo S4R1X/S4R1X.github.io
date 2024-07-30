@@ -40,14 +40,7 @@ body {
     user-select: none;
 }
 
-.supercell {
-    font-size: 10rem;
-    font-size: 5rem;
-    /* Adjusted for smaller screens */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+.supercell {}
 
 .cell .subboard {
     position: absolute;
@@ -135,9 +128,7 @@ body {
         font-size: 4rem;
     }
 
-    .supercell {
-        font-size: 12rem;
-    }
+    .supercell {}
 
     .endcard {
         height: 20%;
@@ -162,9 +153,7 @@ body {
         font-size: 4rem;
     }
 
-    .supercell {
-        font-size: 10rem;
-    }
+    .supercell {}
 
     .endcard {
         height: 20%;

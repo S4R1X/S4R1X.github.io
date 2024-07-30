@@ -89,23 +89,23 @@ function bitWinCheck(big, player) {
 }
 
 function newTarget(small) {
-    let elements = document.getElementsByClassName('subboard')
-    for (var i = 0; i < elements.length; i++) {
-        elements[i].classList.add('nontarget')
-        elements[i].classList.remove('bx')
-        elements[i].classList.remove('bo')
-        elements[i].classList.remove('target')
-    }
+    // let elements = document.getElementsByClassName('supercell')
+    // for (var i = 0; i < elements.length; i++) {
+    //     elements[i].classList.add('nontarget')
+    //     elements[i].classList.remove('bx')
+    //     elements[i].classList.remove('bo')
+    //     elements[i].classList.remove('target')
+    // }
 
-    if (target === 10) {
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].classList.remove('nontarget')
-            elements[i].classList.add('b' + sym)
-        }
-    } else {
-        document.getElementById(small).classList.remove('nontarget');
-        document.getElementById(small).classList.add('b' + sym);
-    }
+    // if (target === 10) {
+    //     for (var i = 0; i < elements.length; i++) {
+    //         elements[i].classList.remove('nontarget')
+    //         elements[i].classList.add('b' + sym)
+    //     }
+    // } else {
+    //     document.getElementById(small).classList.remove('nontarget');
+    //     document.getElementById(small).classList.add('b' + sym);
+    // }
 }
 
 function newGame() {
