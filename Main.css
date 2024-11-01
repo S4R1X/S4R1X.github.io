@@ -149,6 +149,7 @@ dialog {
     margin: auto;
     border: none;
     background-color: #e7e2d2ee;
+    width: 90%;
 
     outline: 0.3rem dashed rgba(188, 74, 60, 0.8);
     outline-offset: -0.5rem;
