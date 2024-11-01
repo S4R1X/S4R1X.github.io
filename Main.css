@@ -23,10 +23,10 @@ header {
     padding: 1rem 5%;
     background-color: #24252A;
     caret-color: transparent;
-    position: fixed;
+    position: sticky;
     top: 0%;
     left: 0%;
-    width: 100%;
+    width: auto;
 
     transition: transform 0.3s ease;
     transform: translateY(0);
@@ -76,6 +76,10 @@ h1 {
 .nav__links li a:hover {
     transition: all 0.3s ease 0s;
     color: #BC4A3C;
+}
+
+#dropper {
+    display: none;
 }
 
 button {
@@ -171,11 +175,6 @@ p {
         display: none;
     }
 
-    header {
-        width: auto;
-        position: sticky;
-    }
-
     h1 {
         margin-inline: auto;
     }
@@ -204,4 +203,48 @@ p {
         margin-left: auto;
     }
 
+    .nav__links li {
+        display: flex;
+        padding: 20px 0px;
+    }
+
+    #dropper {
+
+        position: absolute;
+        width: 100%;
+        max-height: 0;
+        /* Initially hidden */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: max-height 0.7s ease-out;
+        /* Smooth animation */
+    }
+
+    #dropper.show {
+        max-height: 50rem;
+    }
+
+    ul {
+        width: 100%;
+    }
+
+    li {
+        background-color: #24252a92;
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        padding: 1rem !important;
+    }
+
+    li:hover {
+        background-color: #24252adc;
+        color: #BC4A3C;
+        caret-color: transparent;
+    }
+
+    #backUp {
+        background-color: #24252a;
+        padding-inline: 48% !important;
+        height: 2.8rem;
+    }
 }
