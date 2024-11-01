@@ -82,6 +82,46 @@ h1 {
     display: none;
 }
 
+.ContactLink {
+    display: flex;
+    text-align: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    cursor: pointer;
+    caret-color: transparent;
+}
+
+.divider {
+    width: 100%;
+    height: 1%;
+    background-color: #24252A;
+}
+
+.ContactLink:hover {
+    background-color: #c0c0c065;
+}
+
+.ContactItems {
+    margin-left: 1rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: #24252A;
+    font-size: larger;
+}
+
+.ContactLink img {
+    width: 2rem;
+
+}
+
+#closemodel {
+    font-size: larger;
+    margin: 1rem;
+    text-align: center;
+    cursor: pointer;
+    caret-color: transparent;
+}
+
 button {
     margin-left: 2rem;
     padding: 9px 25px;
@@ -247,4 +287,5 @@ p {
         padding-inline: 48% !important;
         height: 2.8rem;
     }
+
 }
