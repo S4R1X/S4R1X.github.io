@@ -20,21 +20,6 @@ window.addEventListener("scroll", () => {
     lastScrollPosition = currentScrollPosition;
 });
 
-
-const openBtn1 = document.querySelector('#openmodel1')
-const openBtn2 = document.querySelector('#openmodel2')
-
-const dialog1 = document.querySelector('#dialog1')
-const dialog2 = document.querySelector('#dialog2')
-const closeBtn1 = document.querySelector('#closemodel1')
-const closeBtn2 = document.querySelector('#closemodel2')
-
-openBtn1.addEventListener('click', () => dialog1.showModal())
-openBtn2.addEventListener('click', () => dialog2.showModal())
-closeBtn1.addEventListener('click', () => dialog1.close())
-closeBtn2.addEventListener('click', () => dialog2.close())
-
-
 const hamburgerBtn = document.querySelector('#Hamburger')
 const upBtn = document.querySelector('#backUp')
 
@@ -61,6 +46,3 @@ function dropDownToggle() {
 
     console.log(dropMen.classList)
 }
-
-
-// hamburgerBtn.addEventListener('click', () => )
