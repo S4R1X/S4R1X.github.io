@@ -21,15 +21,18 @@ window.addEventListener("scroll", () => {
 });
 
 
-const openBtn = document.querySelector('#openmodel')
+const openBtn1 = document.querySelector('#openmodel1')
 const openBtn2 = document.querySelector('#openmodel2')
 
-const dialog = document.querySelector('#dialog')
-const closeBtn = document.querySelector('#closemodel')
+const dialog1 = document.querySelector('#dialog1')
+const dialog2 = document.querySelector('#dialog2')
+const closeBtn1 = document.querySelector('#closemodel1')
+const closeBtn2 = document.querySelector('#closemodel2')
 
-openBtn.addEventListener('click', () => dialog.showModal())
-openBtn2.addEventListener('click', () => dialog.showModal())
-closeBtn.addEventListener('click', () => dialog.close())
+openBtn1.addEventListener('click', () => dialog1.showModal())
+openBtn2.addEventListener('click', () => dialog2.showModal())
+closeBtn1.addEventListener('click', () => dialog1.close())
+closeBtn2.addEventListener('click', () => dialog2.close())
 
 
 const hamburgerBtn = document.querySelector('#Hamburger')
