@@ -22,10 +22,13 @@ window.addEventListener("scroll", () => {
 
 
 const openBtn = document.querySelector('#openmodel')
+const openBtn2 = document.querySelector('#openmodel2')
+
 const dialog = document.querySelector('#dialog')
 const closeBtn = document.querySelector('#closemodel')
 
 openBtn.addEventListener('click', () => dialog.showModal())
+openBtn2.addEventListener('click', () => dialog.showModal())
 closeBtn.addEventListener('click', () => dialog.close())
 
 
