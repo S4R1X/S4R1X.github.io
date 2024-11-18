@@ -122,8 +122,11 @@ h1 {
     caret-color: transparent;
 }
 
-button {
+#openmodel {
     margin-left: 2rem;
+}
+
+button {
     padding: 9px 25px;
     background-color: rgba(188, 74, 60, 1);
     border: none;
@@ -167,6 +170,11 @@ h3 {
     text-decoration: underline;
     font-size: 1.8rem;
 
+}
+
+.disclaimer {
+    text-align: center;
+    margin: auto;
 }
 
 .bgimage {
