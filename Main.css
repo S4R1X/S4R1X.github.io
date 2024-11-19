@@ -30,6 +30,7 @@ header {
 
     transition: transform 0.3s ease;
     transform: translateY(0);
+    border-bottom: #BC4A3C solid 2px;
 }
 
 .hamburger {
@@ -143,9 +144,7 @@ body {
     background-color: #7a8c7d;
 }
 
-#calendar {
-    width: 100%;
-}
+#calendar {}
 
 main {
     display: flexbox;
@@ -197,14 +196,34 @@ h3 {
 }
 
 .calbox {
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 25vw 25vw 25vw 25vw;
+    column-gap: 0px;
+}
+
+.gridItem {}
+
+.calendar {
+    grid-column: 1 / 4;
     width: 100%;
-    height: 90vh;
-    /* padding: 1rem; */
-    /* background-color: rgba(244, 232, 222, 0.8); */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    text-align: center;
-    /* border: #BC4A3C dashed 0.2rem; */
-    border-radius: 0.5rem;
+    border-right: #BC4A3C solid 2px;
+    background-color: lightgray;
+}
+
+.calMenu {
+    grid-column: 4/4;
+    border-left: #BC4A3C solid 2px;
+    background-color: rgb(92, 92, 92);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calMenu a {
+    margin-top: auto;
+    margin-bottom: 20vh;
 }
 
 .visible {
@@ -242,11 +261,9 @@ p {
 
 
 
-    .calbox {}
 
-    .calendar {
-        width: 100%;
-    }
+
+    .calendar {}
 
     button {
         margin-left: auto;
