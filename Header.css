@@ -149,16 +149,14 @@ header {
     }
 
     #dropper {
-
         position: absolute;
         width: 100%;
         max-height: 0;
-        /* Initially hidden */
         overflow: hidden;
         display: flex;
         flex-direction: column;
         transition: max-height 0.7s ease-out;
-        /* Smooth animation */
+        background-color: #24252acd;
     }
 
     #dropper.show {
