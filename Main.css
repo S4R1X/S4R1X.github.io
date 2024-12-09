@@ -1,27 +1,3 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-li,
-a,
-button,
-h1 {
-    font-family: sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    color: whitesmoke;
-    text-decoration: none;
-}
-
-.hidden {
-    transform: translateY(-100%);
-}
-
-
-
-
 body {
     background-color: #7a8c7d;
 }
