@@ -115,8 +115,32 @@ header {
 
 @media (max-width: 750px) {
 
-    button {
-        margin-left: auto;
+    header {
+
+        h1 {
+            margin-inline: auto;
+        }
+
+        button {
+            margin-left: auto;
+        }
+
+        ul {
+            width: 100%;
+        }
+
+        li {
+            background-color: #24252a92;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            padding: 1rem !important;
+        }
+
+        li:hover {
+            background-color: #24252adc;
+            color: #BC4A3C;
+            caret-color: transparent;
+        }
     }
 
     .nav__links li {
@@ -141,23 +165,6 @@ header {
         max-height: 50rem;
     }
 
-    ul {
-        width: 100%;
-    }
-
-    li {
-        background-color: #24252a92;
-        transition: transform 0.3s ease;
-        cursor: pointer;
-        padding: 1rem !important;
-    }
-
-    li:hover {
-        background-color: #24252adc;
-        color: #BC4A3C;
-        caret-color: transparent;
-    }
-
     #backUp {
         background-color: #24252a;
         padding-inline: 48% !important;
@@ -166,10 +173,6 @@ header {
 
     #bignav {
         display: none;
-    }
-
-    h1 {
-        margin-inline: auto;
     }
 
     .hamburger {
