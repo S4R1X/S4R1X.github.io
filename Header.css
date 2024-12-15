@@ -22,16 +22,6 @@ header {
         font-family: serif;
         text-decoration: underline whitesmoke solid 0.1rem;
     }
-
-    button {
-        padding: 9px 25px;
-        background-color: rgba(188, 74, 60, 1);
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.3s ease 0s;
-    }
-
     button:hover {
         background-color: rgba(188, 74, 60, 0.8);
     }
