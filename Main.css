@@ -104,9 +104,11 @@ p {
     .calendar {
         grid-column: 1 / 5;
         grid-row: 1 / 4;
+        border: none;
     }
     .calMenu {
         grid-column: 1 / 5;
         grid-row: 4/ 4;
+        border: none;
     }
 }
