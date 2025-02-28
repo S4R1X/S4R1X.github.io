@@ -100,6 +100,15 @@ p {
     padding: 1rem;
 }
 
+#legend {
+    width: 100%;
+    height: 50%;
+    background-color: #e7e2d2ee;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    margin-top: auto;
+}
+
 @media (max-width: 750px) {
     .calendar {
         grid-column: 1 / 5;
