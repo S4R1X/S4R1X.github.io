@@ -4,7 +4,7 @@ header {
     align-items: center;
     text-align: center;
     padding: 1rem 5%;
-    background-color: #24252A;
+    background-color: #9CB36B;
     caret-color: transparent;
     position: sticky;
     top: 0%;
@@ -13,7 +13,7 @@ header {
 
     transition: transform 0.3s ease;
     transform: translateY(0);
-    border-bottom: #BC4A3C solid 2px;
+    border-bottom: #525252 solid 2px;
 
     h1 {
         margin-right: auto;
@@ -23,7 +23,7 @@ header {
         text-decoration: underline whitesmoke solid 0.1rem;
     }
     button:hover {
-        background-color: rgba(188, 74, 60, 0.8);
+        background-color: #C482B9;
     }
 }
 
@@ -40,7 +40,7 @@ header {
 }
 
 .hamburger:hover .bar {
-    background-color: rgba(188, 74, 60, 1);
+    background-color: #D8ACD0;
 }
 
 .nav__links {
@@ -58,7 +58,7 @@ header {
 
 .nav__links li a:hover {
     transition: all 0.3s ease 0s;
-    color: #BC4A3C;
+    color: #D8ACD0;
 }
 
 #dropper {
@@ -120,15 +120,15 @@ header {
         }
 
         li {
-            background-color: #24252a92;
+            background-color: whitesmoke;
             transition: transform 0.3s ease;
             cursor: pointer;
             padding: 1rem !important;
         }
 
         li:hover {
-            background-color: #24252adc;
-            color: #BC4A3C;
+            background-color: #9CB36B;
+            color: #D8ACD0;
             caret-color: transparent;
         }
     }
@@ -146,7 +146,7 @@ header {
         display: flex;
         flex-direction: column;
         transition: max-height 0.7s ease-out;
-        background-color: #24252acd;
+        background-color: #525252;
     }
 
     #dropper.show {
@@ -154,7 +154,7 @@ header {
     }
 
     #backUp {
-        background-color: #24252a;
+        background-color: #9CB36B;
         padding-inline: 48% !important;
         height: 2.8rem;
     }
