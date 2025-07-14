@@ -11,7 +11,7 @@ h1 {
     font-family: sans-serif;
     font-weight: 500;
     font-size: 16px;
-    color: whitesmoke;
+    color: #F2F0E9;
     text-decoration: none;
 }
 
@@ -21,9 +21,10 @@ h1 {
 
 button {
     padding: 9px 25px;
-    background-color: #D8ACD0;
+    background-color: #C26D5C;
     border: none;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
+    color: #F2F0E9;
 }

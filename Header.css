@@ -4,7 +4,7 @@ header {
     align-items: center;
     text-align: center;
     padding: 1rem 5%;
-    background-color: #9CB36B;
+    background-color: #3F362E;
     caret-color: transparent;
     position: sticky;
     top: 0%;
@@ -13,17 +13,17 @@ header {
 
     transition: transform 0.3s ease;
     transform: translateY(0);
-    border-bottom: #525252 solid 2px;
+    border-bottom: #6D6254 solid 2px;
 
     h1 {
         margin-right: auto;
         font-weight: 800;
         font-size: 1.5rem;
         font-family: serif;
-        text-decoration: underline whitesmoke solid 0.1rem;
+        text-decoration: underline #F2F0E9 solid 0.1rem;
     }
     button:hover {
-        background-color: #C482B9;
+        background-color: #A5584A;
     }
 }
 
@@ -35,12 +35,12 @@ header {
     width: 100%;
     height: 0.3rem;
     border-radius: 20%;
-    background-color: whitesmoke;
+    background-color: #F2F0E9;
     transition: background-color 0.3s ease;
 }
 
 .hamburger:hover .bar {
-    background-color: #D8ACD0;
+    background-color: #A5584A;
 }
 
 .nav__links {
@@ -58,7 +58,7 @@ header {
 
 .nav__links li a:hover {
     transition: all 0.3s ease 0s;
-    color: #D8ACD0;
+    color: #A5584A;
 }
 
 #dropper {
@@ -120,7 +120,7 @@ header {
         }
 
         li {
-            background-color: whitesmoke;
+            background-color: #F2F0E9;
             transition: transform 0.3s ease;
             cursor: pointer;
             padding: 1rem !important;
@@ -128,7 +128,7 @@ header {
 
         li:hover {
             background-color: #9CB36B;
-            color: #D8ACD0;
+            color: #A5584A;
             caret-color: transparent;
         }
     }
@@ -146,7 +146,7 @@ header {
         display: flex;
         flex-direction: column;
         transition: max-height 0.7s ease-out;
-        background-color: #525252;
+        background-color: #B7C1A1;
     }
 
     #dropper.show {
@@ -154,7 +154,7 @@ header {
     }
 
     #backUp {
-        background-color: #9CB36B;
+        background-color: #3F362E;
         padding-inline: 48% !important;
         height: 2.8rem;
     }

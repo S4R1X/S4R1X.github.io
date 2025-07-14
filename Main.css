@@ -1,5 +1,5 @@
 body {
-    background-color: #7a8c7d;
+    background-color: #F2F0E9;
 }
 
 #calendar {}
@@ -12,11 +12,11 @@ main {
 dialog {
     margin: auto;
     border: none;
-    background-color: whitesmoke;
+    background-color: #F2F0E9;
     width: fit-content;
     border-radius: 1rem;
 
-    outline: 0.3rem solid #D8ACD0;
+    outline: 0.3rem solid #3F362E;
     outline-offset: -0.5rem;
     padding: 1rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.29);
@@ -49,7 +49,7 @@ h3 {
     margin: 2rem;
     margin-top: 8rem;
 
-    background-color: whitesmoke(244, 232, 222, 0.8);
+    background-color: #F2F0E9(244, 232, 222, 0.8);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
 }
@@ -68,13 +68,13 @@ h3 {
     grid-column: 1 / 4;
     grid-row: 1 / 4;
     width: 100%;
-    background-color: whitesmoke;
+    background-color: #F2F0E9;
 }
 
 .calMenu {
     grid-column: 4/4;
     grid-row: 1 / 4;
-    background-color: whitesmoke;
+    background-color: #F2F0E9;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -102,8 +102,8 @@ p {
 #legend {
     width: 100%;
     height: 50%;
-    background-color: #FB8B24;
-    border: 2px solid #525252;
+    background-color: #B7C1A1;
+    border: 2px solid #6D6254;
     margin: auto;
 }
 
@@ -112,12 +112,12 @@ p {
         grid-column: 1 / 5;
         grid-row: 1 / 4;
         border-right: none;
-        border-bottom: #D8ACD0 solid 2px;
+        border-bottom: #3F362E solid 2px;
     }
     .calMenu {
         grid-column: 1 / 5;
         grid-row: 4/ 4;
         border-left: none;
-        border-top: #D8ACD0 solid 2px;
+        border-top: #3F362E solid 2px;
     }
 }
