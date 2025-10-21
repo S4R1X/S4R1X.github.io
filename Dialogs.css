@@ -1,0 +1,12 @@
+
+.modal-body .nav-link img {
+  max-width: 2rem;
+  margin-right: 0.5rem;
+}
+.modal-body .nav-link h6 {
+  margin-bottom: 0;
+  font-weight: 600; /* match your font-bolder class */
+}
+.modal-body .nav-link {
+  margin-bottom: 0.5rem; /* spacing between links */
+}
