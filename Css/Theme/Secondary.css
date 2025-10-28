@@ -1,0 +1,24 @@
+.bg-secondary {
+    background-color: #6fffd17e !important;
+}
+.btn-secondary {
+    background-color: #5fdab3;
+    border-color: #5fdab3;
+    color: #fff;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active {
+    background-color: #6FFFD2;
+    border-color: #6FFFD2;
+    transform: scale(1.03);
+}
+.btn-secondary:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.25rem #6fffd184;
+}
+.btn-secondary:active:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.25rem #6fffd184;
+}
