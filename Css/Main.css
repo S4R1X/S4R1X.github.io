@@ -23,10 +23,6 @@ main{
 html {
   scroll-behavior: smooth;
 }
-
-.card-hover {
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
 .card-hover:hover {
   transform: scale(1.01); /* smaller lift for subtle effect */
   box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* softer shadow */

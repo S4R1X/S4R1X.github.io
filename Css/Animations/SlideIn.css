@@ -1,6 +1,6 @@
 .slideIn{
     opacity: 0;
-    transition: all 0.8s ease-out;
+    transition: all 1s ease-out;
     filter: blur(1px);
     transform: translateX(100%);
     will-change: opacity, transform, filter;
