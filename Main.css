@@ -14,6 +14,10 @@ main{
     background-color: #6fffd17e !important;
 }
 
+.bg-fancy {
+  background: linear-gradient(135deg, #6fffd18a, #54e0c68c);
+}
+
 .btn-primary {
     background-color: #FF2E9A;
     border-color: #FF2E9A;
