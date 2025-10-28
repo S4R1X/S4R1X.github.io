@@ -1,13 +1,11 @@
-const Observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        console.log(entry)
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
         if(entry.isIntersecting){
-            entry.target.classList.add('slidIn')
-        }else{
-            entry.target.classList.remove('slidIn')
+            entry.target.classList.add('slidIn');
+        } else {
+            entry.target.classList.remove('slidIn');
         }
-    })
-})
+    });
+});
 
-const hiddenItems = document.querySelectorAll('.slideIn')
-hiddenItems.forEach((el) => Observer.observe(el))
+document.querySelectorAll('.slideToLeft, .slideToRight').forEach(el => observer.observe(el));
