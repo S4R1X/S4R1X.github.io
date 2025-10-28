@@ -1,23 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S4R1X</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="Main.css">    <link rel="stylesheet" href="Header.css"> <link rel="stylesheet" href="Dialogs.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S4R1X</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="Main.css">
+  <link rel="stylesheet" href="Header.css">
+  <link rel="stylesheet" href="Dialogs.css">
 </head>
-<body>
-<div id="navbar"></div>
+<bod>
+  <div id="navbar"></div>
 
-This is the main page
+  <main>
+    <section class="hero d-flex flex-column justify-content-center align-items-center text-center vh-100">
+      <div class="container">
+        <h1 class="display-4 fw-bold mb-3">Welcome to my website</h1>
+        <p class="lead mb-4">I am Seth, a Spoken English Teacher and Web Developer.</p>
+        <a href="#about-block" class="btn btn-secondary btn-lg">Explore</a>
+      </div>
+    </section>
+    <section id="about-block" class="py-5">
+      <div class="container">
+        <div class="row justify-content-start">
+          <div class="col-md-8">
+            <div class="card rounded-3 shadow-lg p-4 mb-5 card-hover" style="background: linear-gradient(135deg, #6fffd18a, #54e0c68c);" >
+              <div class="card-body text-start">
+                <h2 class="fw-bold mb-4">About Me</h2>
 
-</body>
-<script>
-fetch('nav.html')
-  .then(res => res.text())
-  .then(html => document.getElementById('navbar').innerHTML = html)
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+                <div class="ps-2">
+                                  <p class="mb-3">
+                  Hello there!
+                </p>
+                <p class="mb-3">
+                  My name is Seth, and I am a Spoken English Teacher and Web Developer. Originally from Canada, I’ve
+                  found a home abroad.
+                </p>
+                <p class="mb-3">
+                  I have a passion for puzzles and problem-solving, and I love learning and taking on new challenges.
+                </p>
+                <p class="mb-3">
+                  Feel free to learn more about me on my About page!
+                </p>
+                </div>
+                <a href="about.html" class="btn btn-primary">Learn More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  </main>
+  </body>
+  <script>
+    fetch('nav.html')
+      .then(res => res.text())
+      .then(html => document.getElementById('navbar').innerHTML = html)
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
 </html>
