@@ -5,7 +5,7 @@
 .float-item {
   animation: float 15s ease-in-out infinite;
   width: 3.4%;
-  min-width: 1.5rem;
+  min-width: 2rem;
 }
 
 .float-item:nth-child(1) { top: 30%; left: 10%; animation-delay: 0s; animation-duration: 19s;}
