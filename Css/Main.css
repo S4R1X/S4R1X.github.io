@@ -35,3 +35,7 @@ html {
   pointer-events: none;
   transform: rotate(20deg);
 }
+
+.z-neg {
+  z-index: -1;
+}
