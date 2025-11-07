@@ -19,3 +19,19 @@ html {
   transform: scale(1.01);
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
+
+.card-bg-svg-left {
+  bottom: -20%;
+  right: -5%;
+  opacity: 0.2;
+  pointer-events: none;
+  transform: rotate(20deg);
+}
+
+.card-bg-svg-right {
+  bottom: -20%;
+  left: -8%;
+  opacity: 0.2;
+  pointer-events: none;
+  transform: rotate(20deg);
+}

@@ -12,23 +12,24 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="Css/Main.css">
-    <link rel="icon" type="image/x-icon" href="/Images/crow-solid-full.svg">
+  <link rel="icon" type="image/x-icon" href="/Images/crow-solid-full.svg">
 
   <script defer src="Js/Animations.js"></script>
-  
+
   <meta charset="UTF-8">
 </head>
+
 <body>
   <div id="navbar"></div>
 
   <div class="floating-bg position-absolute top-0 start-0 w-100 h-100">
-  <img src="Images/cross-svgrepo-com(1).svg" class="float-item img-fluid position-absolute">
-  <img src="Images/cross-svgrepo-com(2).svg" class="float-item img-fluid position-absolute">
-  <img src="Images/circle-xs-svgrepo-com.svg" class="float-item img-fluid position-absolute d-none d-md-block">
-  <img src="Images/game-controller-svgrepo-com.svg" class="float-item img-fluid position-absolute">
-  <img src="Images/circle-xs-svgrepo-com(1).svg" class="float-item img-fluid position-absolute">
-  <img src="Images/black-rook-svgrepo-com.svg" class="float-item img-fluid position-absolute">
-</div>
+    <img src="Images/cross-svgrepo-com(1).svg" class="float-item img-fluid position-absolute">
+    <img src="Images/cross-svgrepo-com(2).svg" class="float-item img-fluid position-absolute">
+    <img src="Images/circle-xs-svgrepo-com.svg" class="float-item img-fluid position-absolute d-none d-md-block">
+    <img src="Images/game-controller-svgrepo-com.svg" class="float-item img-fluid position-absolute">
+    <img src="Images/circle-xs-svgrepo-com(1).svg" class="float-item img-fluid position-absolute">
+    <img src="Images/black-rook-svgrepo-com.svg" class="float-item img-fluid position-absolute">
+  </div>
 
 
   <main class="overflow-hidden">
@@ -39,57 +40,59 @@
         <a href="#about-block" class="btn btn-secondary btn-lg">Explore</a>
       </div>
     </section>
-    <section id="about-block" class="py-5">
+    <section id="about-block" class="pb-5">
       <div class="container">
         <div class="row justify-content-start">
           <div class="col-md-8 slideToLeft">
-            <div class="card rounded-3 shadow-lg p-4 mb-5 card-hover bg-fancy">
+            <div class="card overflow-hidden rounded-3 shadow-lg p-4 card-hover position-relative bg-fancy">
+              <img src="Images/star-alt-4-svgrepo-com.svg" class="card-bg-svg-left position-absolute w-50" alt="">
               <div class="card-body text-start">
                 <h2 class="fw-bold mb-4 text-center">About Me</h2>
 
                 <div class="ps-2">
-                                  <p class="mb-3">
-                  Hello there!
-                </p>
-                <p class="mb-3">
-                  My name is Seth, and I am a Spoken English Teacher and Web Developer. Originally from Canada, I’ve
-                  found a home abroad.
-                </p>
-                <p class="mb-3">
-                  I have a passion for puzzles and problem-solving, and I love learning and taking on new challenges.
-                </p>
-                <p class="mb-3">
-                  Feel free to learn more about me on my About page!
-                </p>
+                  <p class="mb-3">
+                    Hello there!
+                  </p>
+                  <p class="mb-3">
+                    My name is Seth, and I am a Spoken English Teacher and Web Developer. Originally from Canada, I’ve
+                    found a home abroad.
+                  </p>
+                  <p class="mb-3">
+                    I have a passion for puzzles and problem-solving, and I love learning and taking on new challenges.
+                  </p>
+                  <p class="mb-3">
+                    Feel free to learn more about me on my About page!
+                  </p>
                 </div>
-                                <div class="text-center">
+                <div class="text-center">
 
-                <a href="about.html" class="btn btn-primary">Learn More</a>
-                  </div>
+                  <a href="about.html" class="btn btn-primary">Learn More</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-        <section id="calendar-block" class="py-5">
+    <section id="calendar-block" class="pb-5">
       <div class="container">
         <div class="row justify-content-end">
           <div class="col-md-8 slideToRight">
-            <div class="card rounded-3 shadow-lg p-4 mb-5 card-hover bg-fancy">
+            <div class="card overflow-hidden rounded-3 shadow-lg p-4 card-hover bg-fancy">
+              <img src="Images/clock-check-svgrepo-com(1).svg" class="card-bg-svg-right position-absolute w-50" alt="">
               <div class="card-body text-start">
                 <h2 class="fw-bold mb-4 text-center">Calendar</h2>
 
                 <div class="ps-2">
-                                  <p class="mb-3">
-                  Want to book a lesson or meeting?
-                </p>
-                <p class="mb-3">
-                  Check my public calendar to see my availability, it even has day, week, and month views!
-                </p>
+                  <p class="mb-3">
+                    Want to book a lesson or meeting?
+                  </p>
+                  <p class="mb-3">
+                    Check my public calendar to see my availability, it even has day, week, and month views!
+                  </p>
                 </div>
                 <div class="text-center">
-                                  <a href="calendar.html" class="btn btn-primary">Book a time</a>
+                  <a href="calendar.html" class="btn btn-primary">Book a time</a>
                 </div>
               </div>
             </div>
@@ -100,14 +103,13 @@
 
   </main>
   </main>
-  </body>
-  <script>
-    fetch('nav.html')
-      .then(res => res.text())
-      .then(html => document.getElementById('navbar').innerHTML = html)
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+</body>
+<script>
+  fetch('nav.html')
+    .then(res => res.text())
+    .then(html => document.getElementById('navbar').innerHTML = html)
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </html>
