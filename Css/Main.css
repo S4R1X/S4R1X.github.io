@@ -21,16 +21,15 @@ html {
 }
 
 .card-bg-svg-left {
-  bottom: -7%;
   right: -5%;
-  opacity: 0.2;
-  pointer-events: none;
-  transform: rotate(20deg);
 }
 
 .card-bg-svg-right {
-  bottom: -20%;
   left: -8%;
+}
+
+.card-bg-svg{
+  bottom: -14%;
   opacity: 0.2;
   pointer-events: none;
   transform: rotate(20deg);
