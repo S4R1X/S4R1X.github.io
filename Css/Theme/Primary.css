@@ -1,17 +1,18 @@
-.bg-primary {
-    background-color: #FF2E9A !important;
+body {
+    --cl-primary: #ff2e9a;
+    --cl-primary-hover: oklch(from var(--cl-primary) calc(l - 0.13) c h);
 }
 .btn-primary {
-    background-color: #FF2E9A;
-    border-color: #FF2E9A;
+    background-color: var(--cl-primary);
+    border-color: var(--cl-primary);
     color: #fff;
     transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-    background-color: #cd2478;
-    border-color: #cd2478;
+    background-color: var(--cl-primary-hover);
+    border-color: var(--cl-primary-hover);
     transform: scale(1.03);
 }
 .btn-primary:focus {

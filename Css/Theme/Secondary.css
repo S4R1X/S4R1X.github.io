@@ -1,17 +1,18 @@
-.bg-secondary {
-    background-color: #6fffd17e !important;
+body {
+    --cl-secondary: #5fdab3;
+    --cl-secondary-hover: oklch(from var(--cl-secondary) calc(l - 0.13) c h);
 }
 .btn-secondary {
-    background-color: #5fdab3;
-    border-color: #5fdab3;
+    background-color: var(--cl-secondary);
+    border-color: var(--cl-secondary);
     color: #fff;
     transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 .btn-secondary:hover,
 .btn-secondary:focus,
 .btn-secondary:active {
-    background-color: #6FFFD2;
-    border-color: #6FFFD2;
+    background-color: var(--cl-secondary-hover);
+    border-color: var(--cl-secondary-hover);
     transform: scale(1.03);
 }
 .btn-secondary:focus {

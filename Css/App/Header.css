@@ -3,7 +3,7 @@
 }
 
 .nav-link:hover {
-    color: #6FFFD2 !important;
+    color: var(--cl-secondary) !important;
     transform: scale(1.01);
     text-decoration: underline;
 }
