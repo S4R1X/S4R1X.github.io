@@ -5,7 +5,7 @@
 @import url(Animations/SlideIn.css);
 
 .bg-fancy {
-  background: linear-gradient(135deg, var(--cl-secondary), #f4d0ff, var(--cl-primary));
+  background: linear-gradient(135deg, var(--cl-secondary), #f1c4ff, var(--cl-primary));
 }
 
 .fancy {
