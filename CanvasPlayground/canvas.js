@@ -61,9 +61,21 @@ function Circle(x,y,dx,dy,radius,green){
     }
 }
 
+var screen_size, A,B
+
+if (window.innerWidth > window.innerHeight) {
+    A = window.innerWidth
+    B = window.innerHeight
+}else{
+    A = window.innerHeight
+    B = window.innerWidth
+}
+
+screen_size = (A - B)/20
+
 var circle_array = [];
 for (var i = 0; i < 100; i++) {
-    var radius = Math.random() * 50 + 25
+    var radius = Math.random() * screen_size + 25
     var x = Math.random() * (window.innerWidth - radius * 2) + radius   
     var y = Math.random() * (window.innerHeight - radius * 2) + radius
     var dx = (Math.random() - 0.5) * 2
