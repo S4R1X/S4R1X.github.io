@@ -8,46 +8,26 @@ canvas.height = window.innerHeight;
 
 var c = canvas.getContext("2d");
 
+const keys = {
+    left: false,
+    right: false
+};
 
-// window.addEventListener('mousemove', function (event) {
-//     mouse.x = event.x
-//     mouse.y = event.y
-// })
-
-let movekey = [false,false]
-addEventListener("keydown", function (event) {
-// Then display the event.key
-  if (event.code == 'Space'){
-    if (player.y + player.h >= canvas.height - 10    ){
-        player.dy = 170
+addEventListener("keydown", e => {
+    if (e.code === "KeyA") keys.left = true;
+    if (e.code === "KeyD") keys.right = true;
+    if (e.code == 'Space') {
+        if (player.y + player.h >= canvas.height - 10) {
+            player.dy = 170
+        }
     }
-  }
-  if (event.code == 'KeyA'){
-    if (player.y + player.h >= canvas.height - 10    ){
-        player.dx = -10
-    }else{
-        player.dx = -8
-    }
-    movekey[0] = true
-  }
-    if (event.code == 'KeyD'){
-        if (player.y + player.h >= canvas.height - 10    ){
-        player.dx = 10
-    }else{
-        player.dx = 8
-    }
-    movekey[1] = true
-  }
 });
 
-addEventListener('keyup', function (event) {
-      if (event.code == 'KeyA'){
-    movekey[0] = false
-  }
-    if (event.code == 'KeyD'){
-    movekey[1] = false
-  }
-})
+addEventListener("keyup", e => {
+    if (e.code === "KeyA") keys.left = false;
+    if (e.code === "KeyD") keys.right = false;
+});
+
 
 class Player {
     constructor(x, y,w,h, dx, dy) {
@@ -63,26 +43,34 @@ class Player {
         c.fillRect(this.x, this.y, this.w, this.h);
     }
     update() {
-        if (this.y + this.h > canvas.height ) {
-            this.dy = -this.dy *0.15
+        if (keys.left && !keys.right) {
+            this.dx = -10;
+        }
+        else if (keys.right && !keys.left) {
+            this.dx = 10;
+        }
+        if (this.y + this.h > canvas.height) {
+            this.dy = -this.dy * 0.15
             this.y = canvas.height - this.h
         }else{
             this.dy++
         }
-        if (!movekey[0] && !movekey[1]) {
+        if(!keys.left && !keys.right){
             if (this.dx > 0) {
-                this.dx -= 0.1
+                this.dx -= 0.2
                 if (this.y + this.h >= canvas.height){
                     this.dx =0
                 }
             }
             if (this.dx < 0) {
-                this.dx += 0.1
+                this.dx += 0.2
                 if (this.y + this.h >= canvas.height){
                     this.dx =0
                 }
             }
         }
+
+        
         this.y += this.dy;
         this.x += this.dx
         this.draw();
