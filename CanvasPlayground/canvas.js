@@ -59,7 +59,6 @@ addEventListener("keydown", e => {
 });
 
 addEventListener("keypress", e =>{    if (e.code == 'Space') keys.space = true
-    console.log("Jump time: ",player.coyote)
     if (e.code == 'Space') keys.space = true
 })
 
@@ -164,15 +163,15 @@ class Player {
             }
         }
         if (keys.left && !keys.right && this.dx > -10) {
-            this.dx -= 1;
+            this.dx -= 0.4;
             if (this.dx > 0){
-                this.dx -= 1
+                this.dx -= 0.2
             }
         }
         else if (keys.right && !keys.left && this.dx < 10) {
-            this.dx += 1;
+            this.dx += 0.4;
             if (this.dx < 0){
-                this.dx += 1
+                this.dx += 0.2
             }
         }
 
@@ -181,12 +180,17 @@ class Player {
         if(!keys.left && !keys.right){
             if (this.dx > 0) {
                 this.dx -= 0.3
-
+                            if (!this.airborn){
+                    this.dx -=0.3
+            }
             }
             if (this.dx < 0) {
                 this.dx += 0.3
+                            if (!this.airborn){
+                    this.dx +=0.3
             }
-            if (!this.airborn){
+            }
+            if (!this.airborn && this.dx < 0.5&& this.dx > -0.5){
                     this.dx =0
             }
         }
