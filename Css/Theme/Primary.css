@@ -23,3 +23,7 @@ body {
   outline: none;
   box-shadow: 0 0 0 0.25rem rgba(255, 46, 154, 0.5);
 }
+
+.border-primary {
+    border-color: var(--cl-primary) !important;
+}

@@ -1,0 +1,12 @@
+body {
+    --cl-games: #53565b;
+}
+.bg-games{
+    background-color: var(--cl-games) !important;
+}
+
+#PlayArea {
+  width: 60vw;
+  height: 70vh;
+  display: block;
+}

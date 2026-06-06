@@ -289,7 +289,11 @@ let course = []
 function init(){
     course.push(new Platform(200,canvas.height - 200, 200, 50, '#5d3708',"#4c2d08ff",true,true))
     course.push(new Platform(275,canvas.height - 150, 50, 200,'#5d3708',"#4c2d08ff",false,true))
+<<<<<<< HEAD
     course.push(new Platform(650,canvas.height - 400, 200, 50,'#c2d4daff',"#9eb2b8ff",true,true))
+=======
+    course.push(new Platform(650,canvas.height - 400, 200, 50,'#129c08ff',"#0c6305ff",true,true))
+>>>>>>> b6d3455fdae35099d0de7a2e2a361427a0970c42
     course.push(new Platform(canvas.width-500,canvas.height - 150, 500, 150,'#2b5a26ff',"#1f3a1cff",true,true))
     course.push(new Platform(0,canvas.height-5,canvas.width,5, "#2b5a26ff"))
 
