@@ -14,42 +14,6 @@ const keys = {
     space:false
 };
 
-function genNewDot(){
-        let safe = false;
-            let tempx, tempy;
-
-            while (!safe) {
-
-                tempx = Math.random() * (canvas.width - 100) + 25;
-                tempy = canvas.height - ((Math.random() * canvas.height) / 2 + 15);
-
-                safe = true;
-
-                for (let i = 0; i < course.length; i++) {
-
-                    const left = tempx - pelet.radius;
-                    const right = tempx + pelet.radius;
-                    const top = tempy - pelet.radius;
-                    const bottom = tempy + pelet.radius;
-
-                    const plat = course[i];
-
-                    const overlap =
-                        right > plat.x &&
-                        left < plat.x + plat.w &&
-                        bottom > plat.y &&
-                        top < plat.y + plat.h;
-
-                    if (overlap) {
-                        safe = false;
-                        break;
-                    }
-                }
-            }
-            return [tempx,tempy]
-
-}
-
 grounded =false
 
 addEventListener("keydown", e => {
@@ -110,6 +74,43 @@ class Pelet {
         this.playerDistance
         }
     temp
+
+    genNewDot() {
+    let safe = false;
+    let tempx, tempy;
+
+    while (!safe) {
+
+        tempx = Math.random() * (canvas.width - 100) + 25;
+        tempy = canvas.height - ((Math.random() * canvas.height) / 2 + 15);
+
+        safe = true;
+
+        for (let i = 0; i < course.length; i++) {
+
+            const left = tempx - this.radius;
+            const right = tempx + this.radius;
+            const top = tempy - this.radius;
+            const bottom = tempy + this.radius;
+
+            const plat = course[i];
+
+            const overlap =
+                right > plat.x &&
+                left < plat.x + plat.w &&
+                bottom > plat.y &&
+                top < plat.y + plat.h;
+
+            if (overlap) {
+                safe = false;
+                break;
+            }
+        }
+    }
+    this.x=tempx
+    this.y=tempy
+
+}
     draw (){
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
@@ -120,10 +121,7 @@ class Pelet {
     update(){
         this.playerDistance = getDistance(this.x, this.y, player.x, player.y) - this.radius - player.radius
         if (this.playerDistance <= 0) {
-            let temp = genNewDot()
-
-            this.x = temp[0];
-            this.y = temp[1];
+            this.genNewDot()
             score++;
         }
         this.draw()
@@ -137,9 +135,68 @@ class Player {
         this.radius = radius;
         this.dx = dx;
         this.dy = dy;
+        this.jumpForce = -15;
+        this.doubleForce = 0.66
+        this.runSpeed = 10
+        this.runAccel = 0.4
+        this.turnAccel = 0.4
+        this.friction = 0.3
+        this.bounce = 0.05
     }
     airborn = false
     coyote = 10
+
+    jump() {
+        keys.space = false
+        if (this.coyote <= 8) {
+            player.dy = this.jumpForce
+            this.coyote = 10
+        }
+        else if (!grounded) {
+            player.dy = this.jumpForce * this.doubleForce
+            grounded = true
+        }
+    }
+    run(pos){
+        if(this.dx * pos > this.runSpeed - this.runAccel)this.dx = this.runSpeed * pos
+        else{
+            this.dx += this.runAccel * pos;
+            if (this.dx * pos < 0) {
+                this.dx += this.turnAccel * pos
+            }
+        }
+    }
+    stand() {
+        if (!this.airborn && -0.5 < this.dx && this.dx < 0.5) {
+            this.dx = 0
+            return
+        }
+        if (this.dx > 0) {
+            this.dx -= this.friction
+            if (!this.airborn) {
+                this.dx -= this.friction
+            }
+            return
+        }
+        if (this.dx < 0) {
+            this.dx += this.friction
+            if (!this.airborn) {
+                this.dx += this.friction
+            }
+            return
+        }
+    }
+    inWorld() {
+        for (let index = 0; index < course.length; index++) {
+            if (playerOnPlatform(this.x, this.y, this.radius, course[index].x, course[index].y, course[index].w, course[index].h)) {
+                this.dy = -this.dy * this.bounce
+                this.y = course[index].y - this.radius
+                this.airborn = false
+            }
+            playerHitWall(this.x, this.y, this.radius, course[index].x, course[index].y, course[index].w, course[index].h)
+
+        }
+    }
     draw() {
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
@@ -147,85 +204,79 @@ class Player {
         c.fill();
     }
     update() {
-        if(this.coyote <= 10) this.coyote++
-        if(!this.airborn) {
+
+        //calculate coyote time physics
+        if (this.coyote <= 10) this.coyote++
+        if (!this.airborn) {
             grounded = false
             this.coyote = 0
         }
-        if(keys.space == true){
-            keys.space = false
-            if (this.coyote <= 8){
-                player.dy = -15
-                this.coyote = 10
-            }
-            else if(!grounded) {player.dy = -10
-                grounded = true
-            }
-        }
-        if (keys.left && !keys.right && this.dx > -10) {
-            this.dx -= 0.4;
-            if (this.dx > 0){
-                this.dx -= 0.2
-            }
-        }
-        else if (keys.right && !keys.left && this.dx < 10) {
-            this.dx += 0.4;
-            if (this.dx < 0){
-                this.dx += 0.2
-            }
-        }
 
+        //Player jumped
+        if (keys.space == true) this.jump(-1)
+
+        //Player is running
+        if (keys.left && !keys.right)this.run(-1)
+        if (keys.right && !keys.left)this.run(1)
+
+        //platform friction
+        if (!keys.left && !keys.right)this.stand()
+        if ((keys.left && keys.right))this.stand()
+            
+        //falling
         if (this.airborn == true) this.dy += 0.7
-
-        if(!keys.left && !keys.right){
-            if (this.dx > 0) {
-                this.dx -= 0.3
-                            if (!this.airborn){
-                    this.dx -=0.3
-            }
-            }
-            if (this.dx < 0) {
-                this.dx += 0.3
-                            if (!this.airborn){
-                    this.dx +=0.3
-            }
-            }
-            if (!this.airborn && this.dx < 0.5&& this.dx > -0.5){
-                    this.dx =0
-            }
-        }
         this. airborn = true
+
+        //update position
         this.y += this.dy;
         this.x += this.dx
-        if (this.y + this.radius >= canvas.height-1) {
-            this.dy = -this.dy * 0.05
-            this.y = canvas.height - this.radius
-            this.airborn = false
-        }
-        for (let index = 0; index < course.length; index++) {
-            if (playerOnPlatform(this.x, this.y, this.radius, course[index].x, course[index].y, course[index].w, course[index].h)) {
-                this.dy = -this.dy * 0.15
-                this.y = course[index].y - this.radius
-                this.airborn = false
-            }
-            playerHitWall(this.x, this.y, this.radius, course[index].x, course[index].y, course[index].w, course[index].h)
-                
-        }
+
+        //colission detection
+        this.inWorld()
+
+        //update visuals
         this.draw();
     }
 }
 
 class Platform {   
-    constructor(x, y, w, h) {
+    constructor(x, y, w, h,colour, ThreeDColour ,top,right) {
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
+        this.colour = colour
+        this.threeDColour = ThreeDColour
+        this.top = top
+        this.right =right
     }
 
     draw(){
-        c.fillStyle = '#ffffff'
+        c.fillStyle = this.colour
         c.fillRect(this.x,this.y,this.w,this.h)
+        c.beginPath();
+        
+        if (this.top) {
+            c.moveTo(this.x, this.y);
+            c.lineTo(this.x + 25, this.y);
+            c.lineTo(this.x + 25, this.y - 15);
+            c.closePath();
+            c.fillStyle = this.threeDColour;
+            c.fill();
+            c.fillRect(this.x +25,this.y -15,this.w-25, 15)
+        }
+        if (this.right){
+             c.fillStyle = this.threeDColour;
+            c.fillRect(this.x + this.w, this.y, 10, this.h - 10)
+            c.moveTo(this.x + this.w, this.y + this.h);
+            c.lineTo(this.x + this.w + 10, this.y + this.h - 10);
+            c.lineTo(this.x + this.w, this.y + this.h - 10);
+            c.closePath();
+            c.fill();
+        }
+        if (this.top&&this.right){
+            c.fillRect(this.x + this.w, this.y, 10, -15)
+        }
     }
     update(){
         this.draw()
@@ -236,21 +287,22 @@ let player
 let objects = [];
 let course = []
 function init(){
-    player = new Player(canvas.width/2, canvas.height/2, 20, 0, 2)
-    let temp = genNewDot()
-    pelet = new Pelet(temp[0],temp[1], 10, clSecondary)
-    
+    course.push(new Platform(200,canvas.height - 200, 200, 50, '#5d3708',"#4c2d08ff",true,true))
+    course.push(new Platform(275,canvas.height - 150, 50, 200,'#5d3708',"#4c2d08ff",false,true))
+    course.push(new Platform(650,canvas.height - 400, 200, 50,'#c2d4daff',"#9eb2b8ff",true,true))
+    course.push(new Platform(canvas.width-500,canvas.height - 150, 500, 150,'#2b5a26ff',"#1f3a1cff",true,true))
+    course.push(new Platform(0,canvas.height-5,canvas.width,5, "#2b5a26ff"))
+
+    for (i = 0; i < course.length; i++) {
+        objects.push(course[i])
+    }
+
+    player = new Player(canvas.width / 2, canvas.height / 2, 20, 0, 2)
+    pelet = new Pelet(0,0, 10, clSecondary)
+    pelet.genNewDot()
+
     objects.push(player)
     objects.push(pelet)
-    objects.push(new Platform(200,canvas.height - 200, 200, 50))
-    course.push(new Platform(200,canvas.height - 200, 200, 50))
-    objects.push(new Platform(275,canvas.height - 200, 50, 200))
-    course.push(new Platform(275,canvas.height - 150, 50, 200))
-    objects.push(new Platform(650,canvas.height - 400, 200, 50))
-    course.push(new Platform(650,canvas.height - 400, 200, 50))
-    objects.push(new Platform(canvas.width-500,canvas.height - 150, 500, 150))
-    course.push(new Platform(canvas.width-500,canvas.height - 150, 500, 150))
-
     for (i = 0; i < objects.length; i++) {
         objects[i].draw();
     }
@@ -263,9 +315,10 @@ function animate() {
     c.clearRect(0, 0, window.innerWidth, window.innerHeight);
     for (i = 0; i < objects.length; i++) {
         objects[i].update();
-        c.font = "30px Arial";
-        c.fillText(score, 10, 50);
     }
+    c.font = "30px monospace";
+    c.fillStyle = "#FFFFFF"
+    c.fillText("Score: "+ score, 10, 50);
 }
-    
+
 init()
