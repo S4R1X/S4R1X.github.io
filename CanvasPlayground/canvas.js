@@ -11,22 +11,85 @@ var c = canvas.getContext("2d");
 const keys = {
     left: false,
     right: false,
+    space:false
 };
+
+function genNewDot(){
+        let safe = false;
+            let tempx, tempy;
+
+            while (!safe) {
+
+                tempx = Math.random() * (canvas.width - 100) + 25;
+                tempy = canvas.height - ((Math.random() * canvas.height) / 2 + 15);
+
+                safe = true;
+
+                for (let i = 0; i < course.length; i++) {
+
+                    const left = tempx - pelet.radius;
+                    const right = tempx + pelet.radius;
+                    const top = tempy - pelet.radius;
+                    const bottom = tempy + pelet.radius;
+
+                    const plat = course[i];
+
+                    const overlap =
+                        right > plat.x &&
+                        left < plat.x + plat.w &&
+                        bottom > plat.y &&
+                        top < plat.y + plat.h;
+
+                    if (overlap) {
+                        safe = false;
+                        break;
+                    }
+                }
+            }
+            return [tempx,tempy]
+
+}
 
 grounded =false
 
 addEventListener("keydown", e => {
     if (e.code === "KeyA") keys.left = true;
     if (e.code === "KeyD") keys.right = true;
-    if (e.code == 'Space') {
-        if (player.y + player.radius >= canvas.height - 10) {
-            player.dy = 130
-        }else if(!grounded){
-            player.dy = -15
-            grounded = !grounded
-        }
-    }
+
 });
+
+addEventListener("keypress", e =>{    if (e.code == 'Space') keys.space = true
+    console.log("Jump time: ",player.coyote)
+    if (e.code == 'Space') keys.space = true
+})
+
+function playerOnPlatform(playx,playy,playr, platx,platy,platw,plath){
+    pl = [playx,playy,playr]
+    platform = [ platx,platy,platw,plath]
+    if(pl[0] < platform[0]+platform[2]&& pl[1]+pl[2] > platform[1]-1 && pl[0] > platform[0]+1&& pl[1]< platform[1]){
+        return true
+    }
+     return false
+}
+
+function playerHitWall(playx,playy,playr, platx,platy,platw,plath){
+    pl = [playx,playy,playr]
+    platform = [ platx,platy,platw,plath]
+    if(pl[0] < platform[0]+platform[2]+pl[2] && pl[1]+pl[2] > platform[1]+3 && pl[0] - pl[2] > platform[0] && pl[1]+pl[2] < platform[1]+platform[3]){
+        player.x = platform[0]+platform[2]+pl[2]
+        player.dx = 0
+        return true
+    }else if(pl[0]+pl[2] > platform[0] && pl[1]+pl[2] > platform[1]+3 && pl[0] < platform[0]+platform[2]/2 && pl[1] < platform[1]+platform[3]){
+        player.x = platform[0]-pl[2]
+        player.dx = 0
+        return true
+    }
+    else if(pl[0] < platform[0]+platform[2]&& pl[1]-pl[2] < platform[1]+platform[3]-1 && pl[0] > platform[0]+1&& pl[1]> platform[1]){
+        player.y = platform[1]+platform[3]+pl[2]
+        player.dy =0
+        return true
+    }
+}
 
 addEventListener("keyup", e => {
     if (e.code === "KeyA") keys.left = false;
@@ -47,6 +110,7 @@ class Pelet {
         this.colour = colour
         this.playerDistance
         }
+    temp
     draw (){
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
@@ -55,11 +119,13 @@ class Pelet {
     }
 
     update(){
-        this.playerDistance = getDistance(this.x,this.y,player.x,player.y) - this.radius - player.radius
-        if(this.playerDistance <= 0){
-            this.x = Math.random() * (canvas.width - 100) +25
-            this.y = canvas.height - ((Math.random() * canvas.height)/2 + 15)
-            score++
+        this.playerDistance = getDistance(this.x, this.y, player.x, player.y) - this.radius - player.radius
+        if (this.playerDistance <= 0) {
+            let temp = genNewDot()
+
+            this.x = temp[0];
+            this.y = temp[1];
+            score++;
         }
         this.draw()
     }
@@ -73,6 +139,8 @@ class Player {
         this.dx = dx;
         this.dy = dy;
     }
+    airborn = false
+    coyote = 10
     draw() {
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
@@ -80,6 +148,21 @@ class Player {
         c.fill();
     }
     update() {
+        if(this.coyote <= 10) this.coyote++
+        if(!this.airborn) {
+            grounded = false
+            this.coyote = 0
+        }
+        if(keys.space == true){
+            keys.space = false
+            if (this.coyote <= 8){
+                player.dy = -15
+                this.coyote = 10
+            }
+            else if(!grounded) {player.dy = -10
+                grounded = true
+            }
+        }
         if (keys.left && !keys.right && this.dx > -10) {
             this.dx -= 1;
             if (this.dx > 0){
@@ -93,43 +176,77 @@ class Player {
             }
         }
 
-        if (this.y + this.radius > canvas.height) {
-            grounded = false
-            this.dy = -this.dy * 0.15
-            this.y = canvas.height - this.radius
-        }else{
-            this.dy++
-        }
+        if (this.airborn == true) this.dy += 0.7
 
         if(!keys.left && !keys.right){
             if (this.dx > 0) {
-                this.dx -= 0.2
-                if (this.y + this.radius >= canvas.height){
-                    this.dx =0
-                }
+                this.dx -= 0.3
+
             }
             if (this.dx < 0) {
-                this.dx += 0.2
-                if (this.y + this.radius >= canvas.height){
+                this.dx += 0.3
+            }
+            if (!this.airborn){
                     this.dx =0
-                }
             }
         }
-
-        
+        this. airborn = true
         this.y += this.dy;
         this.x += this.dx
+        if (this.y + this.radius >= canvas.height-1) {
+            this.dy = -this.dy * 0.05
+            this.y = canvas.height - this.radius
+            this.airborn = false
+        }
+        for (let index = 0; index < course.length; index++) {
+            if (playerOnPlatform(this.x, this.y, this.radius, course[index].x, course[index].y, course[index].w, course[index].h)) {
+                this.dy = -this.dy * 0.15
+                this.y = course[index].y - this.radius
+                this.airborn = false
+            }
+            playerHitWall(this.x, this.y, this.radius, course[index].x, course[index].y, course[index].w, course[index].h)
+                
+        }
         this.draw();
+    }
+}
+
+class Platform {   
+    constructor(x, y, w, h) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+    }
+
+    draw(){
+        c.fillStyle = '#ffffff'
+        c.fillRect(this.x,this.y,this.w,this.h)
+    }
+    update(){
+        this.draw()
     }
 }
 
 let player
 let objects = [];
+let course = []
 function init(){
     player = new Player(canvas.width/2, canvas.height/2, 20, 0, 2)
-    pelet = new Pelet(Math.random() * (canvas.width - 100) +25,canvas.height - ((Math.random() * canvas.height)/2 + 15), 10, clSecondary)
+    let temp = genNewDot()
+    pelet = new Pelet(temp[0],temp[1], 10, clSecondary)
+    
     objects.push(player)
     objects.push(pelet)
+    objects.push(new Platform(200,canvas.height - 200, 200, 50))
+    course.push(new Platform(200,canvas.height - 200, 200, 50))
+    objects.push(new Platform(275,canvas.height - 200, 50, 200))
+    course.push(new Platform(275,canvas.height - 150, 50, 200))
+    objects.push(new Platform(650,canvas.height - 400, 200, 50))
+    course.push(new Platform(650,canvas.height - 400, 200, 50))
+    objects.push(new Platform(canvas.width-500,canvas.height - 150, 500, 150))
+    course.push(new Platform(canvas.width-500,canvas.height - 150, 500, 150))
+
     for (i = 0; i < objects.length; i++) {
         objects[i].draw();
     }
