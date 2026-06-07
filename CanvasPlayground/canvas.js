@@ -14,6 +14,11 @@ const keys = {
     space:false
 };
 
+const camera = {
+    x: 0,
+    y: 0
+};
+
 grounded =false
 
 addEventListener("keydown", e => {
@@ -313,9 +318,15 @@ function init(){
 function animate() {
     requestAnimationFrame(animate);
     c.clearRect(0, 0, window.innerWidth, window.innerHeight);
+camera.x += (player.x - canvas.width * 0.5 - camera.x) * 0.1;
+camera.y += (player.y - canvas.height * 0.6 - camera.y) * 0.1;
+     c.save();
+
+    c.translate(-camera.x, -camera.y);
     for (i = 0; i < objects.length; i++) {
         objects[i].update();
     }
+        c.restore();
     c.font = "30px monospace";
     c.fillStyle = "#FFFFFF"
     c.fillText("Score: "+ score, 10, 50);
