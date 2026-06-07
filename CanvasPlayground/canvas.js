@@ -11,7 +11,8 @@ var c = canvas.getContext("2d");
 const keys = {
     left: false,
     right: false,
-    space:false
+    space:false,
+    shift:false
 };
 
 const camera = {
@@ -24,17 +25,17 @@ grounded =false
 addEventListener("keydown", e => {
     if (e.code === "KeyA") keys.left = true;
     if (e.code === "KeyD") keys.right = true;
-
+    if (e.code == 'ShiftLeft') keys.shift = true
 });
 
-addEventListener("keypress", e =>{    if (e.code == 'Space') keys.space = true
+addEventListener("keypress", e =>{    
     if (e.code == 'Space') keys.space = true
 })
 
 function playerOnPlatform(playx,playy,playr, platx,platy,platw,plath){
     pl = [playx,playy,playr]
     platform = [ platx,platy,platw,plath]
-    if(pl[0] < platform[0]+platform[2]&& pl[1]+pl[2] > platform[1]-1 && pl[0] > platform[0]+1&& pl[1]< platform[1]){
+    if(pl[0] < platform[0]+platform[2]&& pl[1]+pl[2] > platform[1]-player.dy && pl[0] > platform[0]+1&& pl[1]< platform[1]){
         return true
     }
      return false
@@ -62,6 +63,7 @@ function playerHitWall(playx,playy,playr, platx,platy,platw,plath){
 addEventListener("keyup", e => {
     if (e.code === "KeyA") keys.left = false;
     if (e.code === "KeyD") keys.right = false;
+    if (e.code == 'ShiftLeft') keys.shift = false
 });
 
 function getDistance (x1,y1,x2,y2){
@@ -150,8 +152,11 @@ class Player {
     }
     airborn = false
     coyote = 10
+    boostCooldown = 0
+    onIndex = -1
 
     jump() {
+        this.onIndex = -1
         keys.space = false
         if (this.coyote <= 8) {
             player.dy = this.jumpForce
@@ -164,12 +169,17 @@ class Player {
     }
     run(pos){
         if(this.dx * pos > this.runSpeed - this.runAccel)this.dx = this.runSpeed * pos
-        else{
+        {
             this.dx += this.runAccel * pos;
             if (this.dx * pos < 0) {
                 this.dx += this.turnAccel * pos
             }
         }
+    }
+    boost(){
+        this.runSpeed += 50
+        this.boostCooldown = 50
+        this.dx *= 1.5
     }
     stand() {
         if (!this.airborn && -0.5 < this.dx && this.dx < 0.5) {
@@ -197,8 +207,9 @@ class Player {
                 this.dy = -this.dy * this.bounce
                 this.y = course[index].y - this.radius
                 this.airborn = false
+                this.onIndex = index
             }
-            playerHitWall(this.x, this.y, this.radius, course[index].x, course[index].y, course[index].w, course[index].h)
+            if(this.onIndex != index) playerHitWall(this.x, this.y, this.radius, course[index].x, course[index].y, course[index].w, course[index].h)
 
         }
     }
@@ -217,13 +228,19 @@ class Player {
             this.coyote = 0
         }
 
+        if (this.boostCooldown > 0) this.boostCooldown--
+        if (this.boostCooldown == 30) this.runSpeed -=50
+            
+
+
         //Player jumped
         if (keys.space == true) this.jump(-1)
 
         //Player is running
         if (keys.left && !keys.right)this.run(-1)
         if (keys.right && !keys.left)this.run(1)
-
+        
+        if (keys.shift && this.boostCooldown == 0)this.boost()
         //platform friction
         if (!keys.left && !keys.right)this.stand()
         if ((keys.left && keys.right))this.stand()
@@ -295,14 +312,14 @@ function init(){
     course.push(new Platform(200,canvas.height - 200, 200, 50, '#5d3708',"#4c2d08ff",true,true))
     course.push(new Platform(275,canvas.height - 150, 50, 200,'#5d3708',"#4c2d08ff",false,true))
     course.push(new Platform(650,canvas.height - 400, 200, 50,'#c2d4daff',"#9eb2b8ff",true,true))
-    course.push(new Platform(canvas.width-500,canvas.height - 150, 500, 150,'#2b5a26ff',"#1f3a1cff",true,true))
-    course.push(new Platform(0,canvas.height-5,canvas.width,5, "#2b5a26ff"))
+    course.push(new Platform(canvas.width-500,canvas.height - 150, canvas.width * 5, 150,'#2b5a26ff',"#1f3a1cff",true,true))
+    course.push(new Platform(0,canvas.height-5,canvas.width,500, "#2b5a26ff"))
 
     for (i = 0; i < course.length; i++) {
         objects.push(course[i])
     }
 
-    player = new Player(canvas.width / 2, canvas.height / 2, 20, 0, 2)
+    player = new Player(canvas.width / 2,0- ( canvas.height*3), 20, 0, 2)
     pelet = new Pelet(0,0, 10, clSecondary)
     pelet.genNewDot()
 
@@ -330,6 +347,14 @@ camera.y += (player.y - canvas.height * 0.6 - camera.y) * 0.1;
     c.font = "30px monospace";
     c.fillStyle = "#FFFFFF"
     c.fillText("Score: "+ score, 10, 50);
+    c.fillRect(35,70,50,100)
+    c.fillStyle = "#767676ff"
+    c.fillRect(40,75,40,90)
+    temp = Math.round( player.boostCooldown/50 *100)/100
+    barRed = 255 *temp
+    barGreen = 255 -  (255 * temp)
+    c.fillStyle = `rgb(${barRed}, ${barGreen}, 120)`
+    c.fillRect(40,75 + (90 *temp),40,90 - (90 *temp))
 }
 
 init()
