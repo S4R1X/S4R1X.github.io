@@ -1,7 +1,7 @@
 var canvas = document.querySelector("canvas");
 
 const clPrimary = window.getComputedStyle(document.body).getPropertyValue('--cl-primary');
-const clSecondary = window.getComputedStyle(document.body).getPropertyValue('--cl-secondary');
+const clSecondary = "#fff700ff"
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight;
 
@@ -21,6 +21,7 @@ const camera = {
 };
 
 grounded =false
+facing = true
 
 addEventListener("keydown", e => {
     if (e.code === "KeyA") keys.left = true;
@@ -35,29 +36,68 @@ addEventListener("keypress", e =>{
 function playerOnPlatform(playx,playy,playr, platx,platy,platw,plath){
     pl = [playx,playy,playr]
     platform = [ platx,platy,platw,plath]
-    if(pl[0] < platform[0]+platform[2]&& pl[1]+pl[2] > platform[1]-player.dy && pl[0] > platform[0]+1&& pl[1]< platform[1]){
+    
+    if(
+        pl[0] < platform[0]+platform[2]
+        && pl[1]+pl[2] > platform[1]-player.dy 
+        && pl[0] > platform[0]+1
+        && pl[1]< platform[1]+player.dy-pl[2]){
         return true
     }
      return false
 }
 
-function playerHitWall(playx,playy,playr, platx,platy,platw,plath){
-    pl = [playx,playy,playr]
-    platform = [ platx,platy,platw,plath]
-    if(pl[0] < platform[0]+platform[2]+pl[2] && pl[1]+pl[2] > platform[1]+3 && pl[0] - pl[2] > platform[0] && pl[1]+pl[2] < platform[1]+platform[3]){
-        player.x = platform[0]+platform[2]+pl[2]
-        player.dx = 0
-        return true
-    }else if(pl[0]+pl[2] > platform[0] && pl[1]+pl[2] > platform[1]+3 && pl[0] < platform[0]+platform[2]/2 && pl[1] < platform[1]+platform[3]){
-        player.x = platform[0]-pl[2]
-        player.dx = 0
-        return true
+function playerHitWall(playx, playy, playr, platx, platy, platw, plath) {
+
+    const px = playx;
+    const py = playy;
+    const r = playr;
+
+    const left = px - r;
+    const right = px + r;
+    const top = py - r;
+    const bottom = py + r;
+
+    const pLeft = platx;
+    const pRight = platx + platw;
+    const pTop = platy;
+    const pBottom = platy + plath;
+
+    const overlap =
+        right > pLeft &&
+        left < pRight &&
+        bottom > pTop &&
+        top < pBottom;
+
+    if (!overlap) return false;
+
+    // compute overlap depths
+    const fromLeft = pRight - left;
+    const fromRight = right - pLeft;
+    const fromTop = pBottom - top;
+    const fromBottom = bottom - pTop;
+
+    // resolve smallest penetration axis
+    const min = Math.min(fromLeft, fromRight, fromTop, fromBottom);
+
+    if (min === fromLeft) {
+        player.x = pRight + r;
+        player.dx = 0;
+    } 
+    else if (min === fromRight) {
+        player.x = pLeft - r;
+        player.dx = 0;
+    } 
+    else if (min === fromTop) {
+        player.y = pBottom + r;
+        player.dy = 0;
+    } 
+    else {
+        player.y = pTop - r;
+        player.dy = 0;
     }
-    else if(pl[0] < platform[0]+platform[2]&& pl[1]-pl[2] < platform[1]+platform[3]-1 && pl[0] > platform[0]+1&& pl[1]> platform[1]){
-        player.y = platform[1]+platform[3]+pl[2]
-        player.dy =0
-        return true
-    }
+
+    return true;
 }
 
 addEventListener("keyup", e => {
@@ -84,12 +124,12 @@ class Pelet {
 
     genNewDot() {
     let safe = false;
-    let tempx, tempy;
+    let tempx, tempy,above;
 
     while (!safe) {
-
-        tempx = Math.random() * (canvas.width - 100) + 25;
-        tempy = canvas.height - ((Math.random() * canvas.height) / 2 + 15);
+        above = course[Math.floor(Math.random()*course.length)]
+        tempx = above.x + (Math.random() * above.w)
+        tempy = above.y - (Math.random() * 200)+15
 
         safe = true;
 
@@ -118,6 +158,10 @@ class Pelet {
     this.y=tempy
 
 }
+
+    destroy(){
+        this.x = -100000
+    }
     draw (){
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
@@ -128,141 +172,166 @@ class Pelet {
     update(){
         this.playerDistance = getDistance(this.x, this.y, player.x, player.y) - this.radius - player.radius
         if (this.playerDistance <= 0) {
-            this.genNewDot()
+            // this.genNewDot()
             score++;
+            this.destroy()
         }
         this.draw()
     }
 }
 
-class Player {
-    constructor(x, y,radius, dx, dy) {
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-        this.dx = dx;
-        this.dy = dy;
-        this.jumpForce = -15;
-        this.doubleForce = 0.66
-        this.runSpeed = 10
-        this.runAccel = 0.4
-        this.turnAccel = 0.4
-        this.friction = 0.3
-        this.bounce = 0.05
-    }
-    airborn = false
-    coyote = 10
-    boostCooldown = 0
-    onIndex = -1
+    class Player {
+        constructor(x, y,radius, dx, dy) {
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.dx = dx;
+            this.dy = dy;
+            this.jumpForce = -15;
+            this.doubleForce = 0.66
+            this.runSpeed = 10
+            this.runAccel = 0.4
+            this.turnAccel = 0.4
+            this.friction = 0.3
+            this.bounce = 0.05
+        }
+        airborn = false
+        coyote = 10
+        boostCooldown = 0
+        onIndex = -1
 
-    jump() {
-        this.onIndex = -1
-        keys.space = false
-        if (this.coyote <= 8) {
-            player.dy = this.jumpForce
-            this.coyote = 10
-        }
-        else if (!grounded) {
-            player.dy = this.jumpForce * this.doubleForce
-            grounded = true
-        }
-    }
-    run(pos){
-        if(this.dx * pos > this.runSpeed - this.runAccel)this.dx = this.runSpeed * pos
-        {
-            this.dx += this.runAccel * pos;
-            if (this.dx * pos < 0) {
-                this.dx += this.turnAccel * pos
+        jump() {
+            this.onIndex = -1
+            keys.space = false
+            if (this.coyote <= 8) {
+                player.dy = this.jumpForce
+                this.coyote = 10
+            }
+            else if (!grounded) {
+                player.dy = this.jumpForce * this.doubleForce
+                grounded = true
             }
         }
-    }
-    boost(){
-        this.runSpeed += 50
-        this.boostCooldown = 50
-        this.dx *= 1.5
-    }
-    stand() {
-        if (!this.airborn && -0.5 < this.dx && this.dx < 0.5) {
-            this.dx = 0
-            return
+        run(pos){
+            if(this.dx * pos > this.runSpeed - this.runAccel)this.dx = this.runSpeed * pos
+            {
+                this.dx += this.runAccel * pos;
+                if (this.dx * pos < 0) {
+                    this.dx += this.turnAccel * pos
+                }
+            }
         }
-        if (this.dx > 0) {
-            this.dx -= this.friction
-            if (!this.airborn) {
+        boost(){
+            this.runSpeed += 50
+            this.boostCooldown = 50
+            this.dx *= 1.5
+            this.dy -= 2
+        }
+        stand() {
+            if (!this.airborn && -0.5 < this.dx && this.dx < 0.5) {
+                this.dx = 0
+                return
+            }
+            if (this.dx > 0) {
                 this.dx -= this.friction
+                if (!this.airborn) {
+                    this.dx -= this.friction
+                }
+                return
             }
-            return
-        }
-        if (this.dx < 0) {
-            this.dx += this.friction
-            if (!this.airborn) {
+            if (this.dx < 0) {
                 this.dx += this.friction
+                if (!this.airborn) {
+                    this.dx += this.friction
+                }
+                return
             }
-            return
         }
-    }
-    inWorld() {
-        for (let index = 0; index < course.length; index++) {
-            if (playerOnPlatform(this.x, this.y, this.radius, course[index].x, course[index].y, course[index].w, course[index].h)) {
-                this.dy = -this.dy * this.bounce
-                this.y = course[index].y - this.radius
-                this.airborn = false
-                this.onIndex = index
+        inWorld() {
+            for (let index = 0; index < course.length; index++) {
+                if (playerOnPlatform(this.x, this.y, this.radius, course[index].x, course[index].y, course[index].w, course[index].h)) {
+                    this.dy = -this.dy * this.bounce
+                    this.y = course[index].y - this.radius
+                    this.airborn = false
+                    this.onIndex = index
+                }
+                if(this.onIndex != index&& !course[index].floating) playerHitWall(this.x, this.y, this.radius, course[index].x, course[index].y, course[index].w, course[index].h)
+
             }
-            if(this.onIndex != index) playerHitWall(this.x, this.y, this.radius, course[index].x, course[index].y, course[index].w, course[index].h)
-
-        }
-    }
-    draw() {
-        c.beginPath();
-        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-        c.fillStyle = clPrimary
-        c.fill();
-    }
-    update() {
-
-        //calculate coyote time physics
-        if (this.coyote <= 10) this.coyote++
-        if (!this.airborn) {
-            grounded = false
-            this.coyote = 0
         }
 
-        if (this.boostCooldown > 0) this.boostCooldown--
-        if (this.boostCooldown == 30) this.runSpeed -=50
-            
+        draw() {
+            c.beginPath();
+            c.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            c.fillStyle = clPrimary;
+            c.fill();
+
+            const w = this.radius * 2;
+            const h = this.radius * 2;
+
+            // if (facing) {
+            //     c.drawImage(img, this.x - w, this.y - h *1.2, w*1.8, h*1.8);
+            // } else {
+            //     c.save();
+
+            //     c.translate(this.x + w, this.y - h*1.2);
+            //     c.scale(-1, 1);
+
+            //     c.drawImage(img, 0, 0, w*1.8, h*1.8);
+
+            //     c.restore();
+            // }
+            // };
+        }
+        update() {
+
+            //calculate coyote time physics
+            if (this.coyote <= 10) this.coyote++
+            if (!this.airborn) {
+                grounded = false
+                this.coyote = 0
+            }
+
+            if (this.boostCooldown > 0) this.boostCooldown--
+            if (this.boostCooldown == 30) this.runSpeed -=50
+                
 
 
-        //Player jumped
-        if (keys.space == true) this.jump(-1)
+            //Player jumped
+            if (keys.space == true) this.jump(-1)
 
-        //Player is running
-        if (keys.left && !keys.right)this.run(-1)
-        if (keys.right && !keys.left)this.run(1)
-        
-        if (keys.shift && this.boostCooldown == 0)this.boost()
-        //platform friction
-        if (!keys.left && !keys.right)this.stand()
-        if ((keys.left && keys.right))this.stand()
-            
-        //falling
-        if (this.airborn == true) this.dy += 0.7
-        this. airborn = true
+            //Player is running
+            if (keys.left && !keys.right){
+                this.run(-1)
+                facing = true
+            }
+            if (keys.right && !keys.left){
+                this.run(1)
+                facing = false
+            }
+            if (keys.shift && this.boostCooldown == 0)this.boost()
+            //platform friction
+            if (!keys.left && !keys.right)this.stand()
+            if ((keys.left && keys.right))this.stand()
+                
+            //falling
+            if (this.airborn == true) this.dy += 0.7
+            this. airborn = true
 
-        //update position
-        this.y += this.dy;
-        this.x += this.dx
+            //update position
+            this.y += this.dy;
+            this.x += this.dx
 
-        //colission detection
-        this.inWorld()
+            //colission detection
+            this.inWorld()
 
-        //update visuals
-        this.draw();
+            //update visuals
+            this.draw();
+        }
     }
-}
 
 class Platform {   
-    constructor(x, y, w, h,colour, ThreeDColour ,top,right) {
+    constructor(x, y, w, h,colour, ThreeDColour ,top,right, floating,extendtop,extendcorner,extendright) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -271,6 +340,10 @@ class Platform {
         this.threeDColour = ThreeDColour
         this.top = top
         this.right =right
+        this.floating = floating
+        this.extendtop = extendtop
+        this.extendcorner =extendcorner
+        this.extendright = extendright
     }
 
     draw(){
@@ -299,6 +372,20 @@ class Platform {
         if (this.top&&this.right){
             c.fillRect(this.x + this.w, this.y, 10, -15)
         }
+        if(this.extendtop){
+            c.fillRect(this.x, this.y, 25, -15)
+        }
+        if(this.extendcorner){
+            c.fillStyle = this.threeDColour;
+            c.moveTo(this.x + this.w, this.y);
+            c.lineTo(this.x + this.w + 10, this.y );
+            c.lineTo(this.x + this.w + 10, this.y - 10);
+            c.closePath();
+            c.fill();
+        }
+        if(this.extendright){
+             c.fillRect(this.x + this.w, this.y+this.h, 10, -15)
+        }
     }
     update(){
         this.draw()
@@ -309,28 +396,62 @@ let player
 let objects = [];
 let course = []
 function init(){
-    course.push(new Platform(200,canvas.height - 200, 200, 50, '#5d3708',"#4c2d08ff",true,true))
-    course.push(new Platform(275,canvas.height - 150, 50, 200,'#5d3708',"#4c2d08ff",false,true))
-    course.push(new Platform(650,canvas.height - 400, 200, 50,'#c2d4daff',"#9eb2b8ff",true,true))
-    course.push(new Platform(canvas.width-500,canvas.height - 150, canvas.width * 5, 150,'#2b5a26ff',"#1f3a1cff",true,true))
-    course.push(new Platform(0,canvas.height-5,canvas.width,500, "#2b5a26ff"))
+    //spawn
+    course.push(new Platform(0,200, 600, 50, '#97C1A9',"#769784ff",true,true,false,true,false))
+        course.push(new Platform(600, 375, 100, 10, '#D2b8b8', "#b09b9bff", true, true, true,true))
+
+    course.push(new Platform(0,250, 600, 300, '#9AB7D3',"#819ab1ff",false,true,false,false,true))
+    course.push(new Platform(600,550, 1100, 200, '#9AB7D3',"#819ab1ff",true,false,false,true,false))
+    course.push(new Platform(0,550, 600, 200, '#9AB7D3',"#819ab1ff"))
+    course.push(new Platform(1700,550, 200, 200, '#9AB7D3',"#819ab1ff"))
+    course.push(new Platform(1900,550, 1100, 200, '#9AB7D3',"#819ab1ff",true,false,false,true,false))
+
+    //floating platforms section
+    course.push(new Platform(1000, 100, 200, 10, '#D9BDE3', "#b79dc0ff", true, true, true))
+    objects.push(new Pelet(1057,80, 10, clSecondary))
+    objects.push(new Pelet(1157,80, 10, clSecondary))
+
+    course.push(new Platform(500, -100, 200, 10, '#D9BDE3', "#b79dc0ff", true, true, true,true))
+    objects.push(new Pelet(557,-120, 10, clSecondary))
+    objects.push(new Pelet(657,-120, 10, clSecondary))
+    course.push(new Platform(300,-290, 200, 200, '#9AB7D3',"#819ab1ff",true,true,false,true,false))
+    objects.push(new Pelet(145,-120, 10, clSecondary))
+    objects.push(new Pelet(145,-220, 10, clSecondary))
+    objects.push(new Pelet(145,-320, 10, clSecondary))
+    course.push(new Platform(-200,-990, 200, 1740, '#9AB7D3',"#819ab1ff"))
+
+
+    course.push(new Platform(1500, -200, 200, 10, '#D9BDE3', "#b79dc0ff", true, false, true))
+    objects.push(new Pelet(1557,-220, 10, clSecondary))
+    objects.push(new Pelet(1657,-220, 10, clSecondary))
+    course.push(new Platform(1700,-600, 200, 600, '#9AB7D3',"#819ab1ff",true,true,false,false,false))
+    course.push(new Platform(1700,200, 200, 350, '#9AB7D3',"#819ab1ff",true,true,false,false,false))
+    course.push(new Platform(1200, -400, 200, 10, '#D9BDE3', "#b79dc0ff", true, true, true,true))
+    objects.push(new Pelet(1257,-420, 10, clSecondary))
+    objects.push(new Pelet(1357,-420, 10, clSecondary))
+    course.push(new Platform(1000, -990, 200, 600, '#9AB7D3',"#819ab1ff",true,true,false))
+
+
+
 
     for (i = 0; i < course.length; i++) {
-        objects.push(course[i])
+        objects.unshift(course[i])
     }
 
-    player = new Player(canvas.width / 2,0- ( canvas.height*3), 20, 0, 2)
-    pelet = new Pelet(0,0, 10, clSecondary)
-    pelet.genNewDot()
+    player = new Player(course[0].x +( course[0].w/2), course[0].y - 50, 20, 0, 2)
+    // pelet = new Pelet(0,0, 10, clSecondary)
+    // pelet.genNewDot()
 
     objects.push(player)
-    objects.push(pelet)
+
     for (i = 0; i < objects.length; i++) {
         objects[i].draw();
     }
     animate();
     return
 }
+const img = new Image();
+img.src = "./images/Drawing(3).png";
 
 function animate() {
     requestAnimationFrame(animate);
@@ -343,7 +464,9 @@ camera.y += (player.y - canvas.height * 0.6 - camera.y) * 0.1;
     for (i = 0; i < objects.length; i++) {
         objects[i].update();
     }
-        c.restore();
+
+        
+    c.restore();
     c.font = "30px monospace";
     c.fillStyle = "#FFFFFF"
     c.fillText("Score: "+ score, 10, 50);
